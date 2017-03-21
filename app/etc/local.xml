@@ -41,9 +41,9 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[localhost]]></host>
-                    <username><![CDATA[gourmetbox_1]]></username>
-                    <password><![CDATA[cXPpHSntGj9S]]></password>
-                    <dbname><![CDATA[gourmetbox_1]]></dbname>
+                    <username><![CDATA[gourmetbox_dev]]></username>
+                    <password><![CDATA[Gourm3tDev]]></password>
+                    <dbname><![CDATA[gourmetbox_dev]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
