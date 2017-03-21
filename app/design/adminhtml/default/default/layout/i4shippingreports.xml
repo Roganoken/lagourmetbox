@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <i4shippingreports_adminhtml_reports_profitability_index>
+        <reference name="content">
+            <block type="i4shippingreports/adminhtml_profitability" name="i4shippingreports_profitability" />
+        </reference>
+    </i4shippingreports_adminhtml_reports_profitability_index>
+</layout>

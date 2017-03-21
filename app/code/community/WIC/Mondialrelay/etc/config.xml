@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<WIC_Mondialrelay>
+			<version>1.5.0</version>
+			<depends>
+				<Mage_Adminhtml />
+				<Mage_Shipping />
+			</depends>          
+        </WIC_Mondialrelay>
+      </modules>      
+      <global>
+		<blocks>
+            <mondialrelay>
+            	<class>WIC_Mondialrelay_Block</class>
+            </mondialrelay>
+			<adminhtml>
+				<rewrite>
+					<system_config_form>WIC_Mondialrelay_Block_System_Config_Form</system_config_form>
+					<system_config_form_field_exportpointsrelais>WIC_Mondialrelay_Block_System_Config_Form_Field_Exportpointsrelais</system_config_form_field_exportpointsrelais>
+					<system_config_form_field_exportpointsrelaiscd>WIC_Mondialrelay_Block_System_Config_Form_Field_Exportpointsrelaiscd</system_config_form_field_exportpointsrelaiscd>
+					<system_config_form_field_exportpointsrelaisld1>WIC_Mondialrelay_Block_System_Config_Form_Field_Exportpointsrelaisld1</system_config_form_field_exportpointsrelaisld1>
+					<system_config_form_field_exportpointsrelaislds>WIC_Mondialrelay_Block_System_Config_Form_Field_Exportpointsrelaislds</system_config_form_field_exportpointsrelaislds>
+					<sales_order_shipment_view>WIC_Mondialrelay_Block_Sales_Order_Shipment_View</sales_order_shipment_view>
+				</rewrite>
+			</adminhtml>            
+        </blocks>
+        <models>
+			<mondialrelay>
+				<class>WIC_Mondialrelay_Model</class>
+				<resourceModel>mondialrelay_mysql4</resourceModel>				
+			</mondialrelay>
+			<mondialrelay_mysql4>
+				<class>WIC_Mondialrelay_Model_Mysql4</class>
+				<entities>
+                    <pointsrelais>
+                        <table>mondialrelay_pointsrelais</table>
+                    </pointsrelais>
+                    <pointsrelaiscd>
+                        <table>mondialrelay_pointsrelaiscd</table>
+                    </pointsrelaiscd>
+                    <pointsrelaisld1>
+                        <table>mondialrelay_pointsrelaisld1</table>
+                    </pointsrelaisld1>
+                    <pointsrelaislds>
+                        <table>mondialrelay_pointsrelaislds</table>
+                    </pointsrelaislds>
+                </entities>
+			</mondialrelay_mysql4>
+			<adminhtml>
+				<rewrite>
+					<system_config_source_shipping_pointsrelais>WIC_Mondialrelay_Model_System_Config_Source_Shipping_Pointsrelais</system_config_source_shipping_pointsrelais>
+					<system_config_backend_shipping_pointsrelais>WIC_Mondialrelay_Model_System_Config_Backend_Shipping_Pointsrelais</system_config_backend_shipping_pointsrelais>
+                    
+					<system_config_source_shipping_pointsrelaisld1>WIC_Mondialrelay_Model_System_Config_Source_Shipping_Pointsrelaisld1</system_config_source_shipping_pointsrelaisld1>
+					<system_config_backend_shipping_pointsrelaisld1>WIC_Mondialrelay_Model_System_Config_Backend_Shipping_Pointsrelaisld1</system_config_backend_shipping_pointsrelaisld1>
+                    
+					<system_config_source_shipping_pointsrelaislds>WIC_Mondialrelay_Model_System_Config_Source_Shipping_Pointsrelaislds</system_config_source_shipping_pointsrelaislds>
+					<system_config_backend_shipping_pointsrelaislds>WIC_Mondialrelay_Model_System_Config_Backend_Shipping_Pointsrelaislds</system_config_backend_shipping_pointsrelaislds>
+                    
+					<system_config_source_shipping_pointsrelaiscd>WIC_Mondialrelay_Model_System_Config_Source_Shipping_Pointsrelaiscd</system_config_source_shipping_pointsrelaiscd>
+					<system_config_backend_shipping_pointsrelaiscd>WIC_Mondialrelay_Model_System_Config_Backend_Shipping_Pointsrelaiscd</system_config_backend_shipping_pointsrelaiscd>
+				</rewrite>
+		  	</adminhtml>			
+		</models>		
+	 	<helpers>
+            <mondialrelay>
+                <class>WIC_Mondialrelay_Helper</class>
+            </mondialrelay>
+        </helpers>
+        <resources>
+        	<mondialrelay_setup>
+        		<setup>
+        			<module>WIC_Mondialrelay</module>
+        			<class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+        		</setup>
+        		<connection>
+        			<use>core_setup</use>
+        		</connection>
+        	</mondialrelay_setup>
+        	<mondialrelay_write>
+        		<connection>
+        			<use>core_write</use>
+        		</connection>
+        	</mondialrelay_write>
+            <mondialrelay_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mondialrelay_read>
+        </resources>
+		<rewrite>
+			<wic_mondialrelay_sales_order_shipment>
+				<from><![CDATA[#^/.*sales_order_shipment/save/#]]></from>
+				<to>/mondialrelay/sales_order_shipment/save/</to>
+			</wic_mondialrelay_sales_order_shipment>
+		</rewrite>        
+      </global>
+	<frontend>
+		<layout>
+            <updates>
+                <mondialrelay>
+                    <file>mondialrelay.xml</file>
+                </mondialrelay>
+            </updates>
+        </layout>
+		
+		<events> 
+            <checkout_controller_onepage_get_additional_after>
+                <observers>
+                    <wic_mondialrelay_observer>
+                        <type>singleton</type>
+                        <class>mondialrelay/observer</class>
+                        <method>setMondialRelay</method>
+                    </wic_mondialrelay_observer>
+                </observers>
+            </checkout_controller_onepage_get_additional_after>
+			
+			<sales_convert_quote_address_to_order>
+                <observers>
+                    <change_adress>
+                        <type>singleton</type>
+							<class>WIC_Mondialrelay_Model_Observer</class>
+                        <method>changeAddress</method>
+                    </change_adress>
+                </observers>
+            </sales_convert_quote_address_to_order>            
+		</events>
+		<routers>
+            <mondialrelay>
+                <use>standard</use>
+                <args>
+                    <module>WIC_Mondialrelay</module>
+                    <frontName>mondialrelay</frontName>
+                </args>
+            </mondialrelay>
+        </routers>		
+		   <translate>
+            <modules>
+                <mondialrelay>
+                    <files>
+                        <default>WIC_Mondialrelay.csv</default>
+                    </files>
+                </mondialrelay>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <mondialrelay>
+                <use>admin</use>
+                <args>
+                    <module>WIC_Mondialrelay</module>
+                    <frontName>mondialrelay</frontName>
+                </args>
+            </mondialrelay>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <wic_mondialrelay after="Mage_Adminhtml">WIC_Mondialrelay_Adminhtml</wic_mondialrelay>
+                    </modules>
+                </args>
+            </adminhtml>            
+        </routers>
+    </admin>    
+	<adminhtml>	
+		 <translate>
+            <modules>
+                <mondialrelay>
+                    <files>
+                        <default>WIC_Mondialrelay.csv</default>
+                    </files>
+                </mondialrelay>
+            </modules>
+        </translate>
+		<menu>
+            <sales translate="title" module="mondialrelay">
+                <title>Sales</title>
+                <sort_order>20</sort_order>
+                <depends><module>Mage_Sales</module></depends>
+                <children>
+                    <mondialrelay translate="title" module="sales">
+                        <title>Mondial Relay</title>
+                        <sort_order>31</sort_order>
+						<children>
+							<impression translate="title" module="sales">
+								<title>Label Printing</title>
+								<action>mondialrelay/sales_impression</action>
+								<sort_order>10</sort_order>
+							</impression>
+						</children>
+                    </mondialrelay>
+				</children>
+			</sales>
+		</menu>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<sales translate="title" module="sales">
+							<title>Sales</title>
+							<sort_order>20</sort_order>
+							<children>
+								<mondialrelay translate="title" module="sales">
+									<title>Mondial Relay</title>
+									<sort_order>31</sort_order>
+									<children>
+										<impression translate="title" module="sales">
+											<title>Label Printing</title>
+											<sort_order>10</sort_order>
+										</impression>
+									</children>
+								</mondialrelay>
+							</children>
+						</sales>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<stores>
+		<admin>
+			<design>
+				<theme>
+					<default>mondialrelay</default>
+				</theme>
+			</design>
+		</admin>
+	</stores>
+	<default>
+   		<shipping>
+   			<mondialrelay>
+				<enseigne>EC000002</enseigne>
+				<marque>49</marque>
+				<cle>Ge6WJzkj</cle>
+   			</mondialrelay>
+   		</shipping>   		
+		<carriers>	
+			<pointsrelais>
+				<model>mondialrelay/carrier_pointsrelais</model>  
+				<active>0</active>
+				<title>Mondial Relay - Livraison en point relais</title>				
+				<adresse1_enseigne>Magasin de test</adresse1_enseigne>
+				<adresse3_enseigne>Adresse de test</adresse3_enseigne>
+				<adresse4_enseigne></adresse4_enseigne>
+				<cp_enseigne>75000</cp_enseigne>
+				<ville_enseigne>Paris</ville_enseigne>
+				<pays_enseigne>FR</pays_enseigne>
+				<tel_enseigne>0123456789</tel_enseigne>				
+				<sallowspecific>0</sallowspecific>
+				<specificerrmsg>L'expédition en Points Relais n'est pas disponible pour le moment. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<handling_type>F</handling_type>
+				<package_weight>0</package_weight>				
+			</pointsrelais>
+			<pointsrelaiscd>
+				<model>mondialrelay/carrier_pointsrelaiscd</model>  
+				<active>0</active>
+				<title>Mondial Relay - Drive</title>						
+				<sallowspecific>0</sallowspecific>
+				<specificerrmsg>L'expédition en Drive n'est pas disponible pour le moment. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<handling_type>F</handling_type>
+				<package_weight>0</package_weight>				
+			</pointsrelaiscd>
+			<pointsrelaisld1>
+				<model>mondialrelay/carrier_pointsrelaisld1</model>  
+				<active>0</active>
+				<title>Mondial Relay - Livraison à Domicile</title>						
+				<sallowspecific>0</sallowspecific>
+				<specificerrmsg>L'expédition en Livraison à Domicile n'est pas disponible pour le moment. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<handling_type>F</handling_type>
+				<package_weight>0</package_weight>				
+			</pointsrelaisld1>
+			<pointsrelaislds>
+				<model>mondialrelay/carrier_pointsrelaislds</model>  
+				<active>0</active>
+				<title>Mondial Relay - Livraison à Domicile spécialisée</title>						
+				<sallowspecific>0</sallowspecific>
+				<specificerrmsg>L'expédition en Livraison à Domicile spécialisée n'est pas disponible pour le moment. Si vous avez des questions concernant ce mode de livraison, merci de nous contacter.</specificerrmsg>
+				<handling_type>F</handling_type>
+				<package_weight>0</package_weight>				
+			</pointsrelaislds>				
+		</carriers>
+	</default>
+
+</config>

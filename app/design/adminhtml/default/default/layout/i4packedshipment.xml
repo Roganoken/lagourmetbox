@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_sales_order_shipment_new>
+        <reference name="head">
+            <action method="addJs" ifconfig="i4packedshipment/general/active" ifvalue="1">
+                <script>i4packedshipment/packedshipment.js</script>
+            </action>
+            <action method="addCss" ifconfig="i4packedshipment/general/active" ifvalue="1">
+                <name>i4packedshipment/windows/themes/default.css</name>
+            </action>
+            <action method="addCss" ifconfig="i4packedshipment/general/active" ifvalue="1">
+                <name>i4packedshipment/windows/themes/magento.css</name>
+            </action>
+<!--			<action method="addCss"><name>i4packedshipment/windows/themes/spread.css</name></action>-->
+<!--			<action method="addCss"><name>i4packedshipment/windows/themes/alert.css</name></action>-->
+<!--			<action method="addCss"><name>i4packedshipment/windows/themes/alert_lite.css</name></action>-->
+<!--			<action method="addCss"><name>i4packedshipment/windows/themes/alphacube.css</name></action>-->
+<!--			<action method="addCss"><name>i4packedshipment/windows/themes/debug.css</name></action>-->
+		
+        </reference>
+        <reference name="order_items">
+            <action method="setTemplate" ifconfig="i4packedshipment/general/active" ifvalue="1">
+                <template helper="i4packedshipment/data/changeOrderItemsTemplate" />
+            </action>
+        </reference>
+        <reference name="js">
+            <block name="address_validation_info_js" type="i4packedshipment/addressvalidationinfojs">
+                <action method="setTemplate" ifconfig="i4packedshipment/general/active" ifvalue="1">
+                    <template helper="i4packedshipment/data/changeAddressValidationJsTemplate" />
+                </action> 
+            </block>
+        </reference>
+    </adminhtml_sales_order_shipment_new> 
+</layout>

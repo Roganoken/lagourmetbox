@@ -1,0 +1,227 @@
+<?php
+$helper = Mage::helper('mondialrelay');
+$arr = $helper->getOptionAPI();
+?>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>  
+<!--div id="Zone_Widgets"></div--> 
+<script type="text/javascript">
+	var option = <?php echo json_encode($arr); ?>;
+	var country_id = '';
+	var postcode = '';
+	// TODO get config
+	var zone_widget = "Zone_Widget_";
+	var mr_input = 's_method_mondialrelay_';	
+	var mr_regex_inputs = 's_method_';
+	var price = '';
+	var label_select_mr = '<?php echo addslashes($this->__('Sélectionner un point relais')) ?>';
+	// TODO END
+	
+	function handledPointRelais(i , all) {
+		var type = all[i];
+		var parent_list_inputs = null;
+		var list_inputs = new Array();
+		
+		$$('input[type="radio"][name="shipping_method"]').each(function(e){
+			var input_id = jQuery(e).attr('id');			
+			if (e.id.indexOf(mr_regex_inputs+type+'_') == 0) {
+				if(parent_list_inputs == null) {
+					parent_list_inputs = jQuery(e).parent().parent();
+					price = jQuery(e).next().find('.price').html();
+				}
+				
+				var w = jQuery(e).parent();
+				if(typeof w[0] != null) {
+					jQuery(e).parent().hide();
+				}
+			}
+			else
+				jQuery(e).click(function(){
+					var w = jQuery("#"+zone_widget+type);
+					if(typeof w[0] != null) {
+						jQuery('#'+zone_widget+type).hide();
+					}
+				});
+		});
+		
+		if(parent_list_inputs != null && typeof jQuery('#'+mr_input+type).val() == 'undefined') {
+			parent_list_inputs.parent().append('<div id="'+zone_widget+type+'"> </div>');
+			var mr_new_input = '<li><input type="radio" class="radio mondialrelay_mondialrelay" id="'+mr_input+type+'" value="mondialrelay_mondialrelay" name="shipping_method"><label for="'+mr_input+type+'">'+label_select_mr+' <span class="price">'+price+'</span></label></li>';
+			jQuery(mr_new_input).appendTo(jQuery(parent_list_inputs));
+			
+			jQuery('#'+mr_input+type).click(function(){
+				for(j in all) {
+					if(zone_widget+all[j] != type && typeof all[j] == 'string' && jQuery("#"+zone_widget+all[j]).css('display') == 'block') {
+						var w = jQuery("#"+zone_widget+all[j]);
+						if(typeof w[0] != null)
+							jQuery("#"+zone_widget+all[j]).hide();
+						
+					}
+				}
+				
+				//********************************
+				// get address info
+				//********************************
+				var a = $('shipping-address-select');				
+				try{
+					var address = $('shipping-address-select').value;
+				}
+				catch(e) {
+					var address = 0;
+				}
+				// var id_country = $('shipping:country_id').value;					
+				var url = '/mondialrelay';
+				var pars = 'address='+address;
+				var myAjax = new Ajax.Request(url, {
+						method: 'get', 
+						parameters: pars, 
+						asynchronous:false, 
+						onSuccess:function(r, json)
+						{ 	
+							var json = r.responseText.evalJSON();
+							country_id 	= json.country_id;
+							postcode  	= json.postcode;
+						}
+					});
+				
+				option.type = type; // pour enregistrer le point relais dans l input				
+					
+				switch(type) {
+					case "pointsrelaiscd":
+						option.dlv_mode = 'DRI';
+					break;
+					case "pointsrelais":
+						option.dlv_mode = '24R';
+					break;
+					default:
+						option.dlv_mode = '24R';
+					break;
+				}
+				
+				if(country_id && postcode) {
+					
+				}
+				else {					
+					postcode = $("shipping:postcode").value;
+					country_id = $("shipping:country_id").value;					
+				}
+				option.country = country_id;
+				option.postcode = postcode;
+				
+				jQuery("#MRW-Map").remove();
+				loadMR_Map("#"+zone_widget+type, option);
+				jQuery("#"+zone_widget+type).show();
+				jQuery("#"+zone_widget+type).trigger("MR_ResizeMap",0);							
+			});
+		}
+		
+		return false;
+	}
+
+jQuery(document).ready(function () {  	
+	
+	checkout.gotoSection = function(section)
+    {
+        var sectionElement = $('opc-'+section);
+        sectionElement.addClassName('allow');
+        this.accordion.openSection('opc-'+section);
+        this.reloadProgressBlock(section);
+    };
+	
+	checkout.reloadProgressBlock = function(toStep){		
+		
+		var updater = new Ajax.Updater('checkout-progress-wrapper', this.progressUrl, {
+            method: 'get',
+            onFailure: this.ajaxFailure.bind(this),
+            parameters: toStep ? {toStep: toStep} : null,
+			onSuccess:function() {
+				;
+			},
+			onUninitialized:function() {
+				// console.log("onUninitialized");
+			},
+			onLoading:function() {
+				// console.log("onLoading");				
+				if('shipping_method' == toStep) {
+					
+					var fomulaire_shipping = $(shipping.form);
+					var element_fomulaire_shipping = Form.getElements($(shipping.form));					
+					var serial = Form.serializeElements(element_fomulaire_shipping);
+					// #1 HANDLE ALL INPUT CARRIER
+					var type_shipping = new Array();
+					type_shipping.push('pointsrelais');
+					type_shipping.push('pointsrelaiscd');
+					var type = 'pointsrelais';
+					for(i in type_shipping){
+						type = type_shipping[i];
+						handledPointRelais(i,type_shipping);
+					}					
+					// #1 END
+				}
+			},
+			onLoaded:function() {
+				// console.log("onLoaded");
+				
+			},
+			onInteractive:function() {
+				// console.log("onInteractive");
+			},
+			onComplete:function() {
+				// console.log(toStep);
+			}
+        });		
+	};
+});  
+
+
+var print_r = function(obj,t){
+ 
+// define tab spacing
+var tab = t || '';
+// check if it's array
+var isArr = Object.prototype.toString.call(obj) === '[object Array]' ? true : false;
+// use {} for object, [] for array
+var str = isArr ? ('Array\n' + tab + '[\n') : ('Object\n' + tab + '{\n');
+ 
+// walk through it's properties
+for(var prop in obj){
+if (obj.hasOwnProperty(prop)) {
+var val1 = obj[prop];
+var val2 = '';
+var type = Object.prototype.toString.call(val1);
+switch(type){
+// recursive if object/array
+case '[object Array]':
+case '[object Object]':
+val2 = print_r(val1, (tab + '\t'));
+break;
+case '[object String]':
+val2 = '\'' + val1 + '\'';
+break;
+default:
+val2 = val1;
+}
+str += tab + '\t' + prop + ' => ' + val2 + ',\n';
+}
+}
+// remove extra comma for last property
+str = str.substring(0, str.length-2) + '\n' + tab;
+return isArr ? (str + ']') : (str + '}');
+};
+</script> 
+
+<style type="text/css">
+.MR-Widget .MRW-Results {
+    height: auto;
+}
+.MR-Widget {
+	width:auto;
+}
+
+.MRW-RList{
+	width:185px!important;
+}
+
+.MRW-Title{
+	display:none;
+}
+</style>

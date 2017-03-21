@@ -1,0 +1,164 @@
+<div id="shipment_service_block">
+<?php $shipment = $this->getShipment(); ?>
+
+    <?php if (!$shipment->getLatestQuote() && !$shipment->isBooked()) {
+      echo '<p>';
+      echo Mage::helper('mfb_myflyingbox')->__('No service available. Please check your shipment data.');
+      echo '</p>'; 
+      
+    } else if (!$shipment->isBooked()) {?>
+    
+    <form id="service-form" action="<?php echo $this->getSubmitUrl(); ?>" method="post">
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    
+        <span class="field-row">
+          <label for="offer_id"><?php echo Mage::helper('mfb_myflyingbox')->__('Select a service:');?></label>
+            <select id="service-selector" name="offer_id">
+            <?php
+              foreach($shipment->getLatestQuote()->getOffers() as $offer) {
+                $insurance_text = " ";
+                if($offer->getInsurable()){
+                  $insurance_price = $offer->getInsurancePriceInCents()/100;
+                  $insurance_text = " (assur.: ".$insurance_price." ".$offer->getCurrency().")";
+                }
+                echo '<option value="'.$offer->getId().'"';
+                if ($shipment->getApiOfferUuid() == $offer->getApiOfferUuid()) echo ' selected';
+                echo '>'.$offer->getMfbProductCode().' - '.$offer->formattedPrice(). $insurance_text. '</option>';
+              }
+            ?>
+            </select>
+            <?php foreach($shipment->getLatestQuote()->getOffers() as $offer) :?>
+                <?php
+                    $service = Mage::getModel('mfb_myflyingbox/service')->loadByCode($offer->getMfbProductCode());
+                ?>
+                <div class="offer_<?php echo $offer->getId(); ?> insurance" style="display: none;">
+                  <label><?php echo Mage::helper('mfb_myflyingbox')->__('Insurable ?'); ?></label>
+                  <input name="offer_<?php echo $offer->getId()?>[insurance]" type="checkbox" <?php if(!$offer->getInsurable()) echo "disabled" ?> <?php if($offer->getInsurable() && $offer->shouldBeInsuredByDefault($shipment->getParentOrder()->getBaseSubtotal()))echo "checked" ?> (>
+
+                </div>
+            <?php endforeach; ?>
+        </span>
+
+        <?php
+          foreach($shipment->getLatestQuote()->getOffers() as $offer) {
+            echo '<input type="hidden" name="offer_'.$offer->getId().'[offer_id]" value="'.$offer->getId().'"/>';
+            
+            // If pickup, display collection date selector
+            if ($offer->pickup) {
+            ?>
+              <div class="offer_<?php echo $offer->getId(); ?> collection_dates" style="display: none;">
+                <span class="field-row">
+              <?php
+                // A pickup is required, we must select the date
+                echo "<label for='offer_".$offer->getId()."[collection_date]'>";
+                echo Mage::helper('mfb_myflyingbox')->__('Select pickup date:');
+                echo "</label>";
+              ?>
+                <select name="offer_<?php echo $offer->getId();?>[collection_date]" class="pickup-date-selector">
+                <?php
+                foreach ( $offer->getCollectionDates() as $date ) {
+                  echo "<option value='".$date->date."'>".$date->date."</option>";
+                }
+                ?>
+              </select>
+              </span>
+            </div>
+          <?php
+            }
+            
+            // if relay delivery, display relay selector
+            
+            if ($offer->relay) {
+            ?>
+              <div class="offer_<?php echo $offer->getId(); ?> delivery_locations" style="display: none;">
+                <span class="field-row">
+              <?php
+                // A pickup is required, we must select the date
+                echo "<label for='offer_".$offer->getId()."[delivery_location_code]'>";
+                echo Mage::helper('mfb_myflyingbox')->__('Select delivery relay:');
+                echo "</label>";
+              ?>
+                <select name="offer_<?php echo $offer->getId();?>[delivery_location_code]" class="delivery-location-selector">
+                <?php
+                foreach ( $offer->getDeliveryLocations() as $location ) {
+                  echo "<option value='".$location->code."'";
+                  $order_shipping_code = end(explode("_", $shipment->getParentOrder()->getShippingMethod()));
+                   if ( $order_shipping_code == $location->code) echo ' selected';
+                  echo ">";
+                  echo $location->code . ' ' . $location->company . ' / ' . $location->street . ' / ' . $location->postal_code.' '.$location->city;
+                  echo "</option>";
+                }
+                ?>
+              </select>
+              </span>
+            </div>
+          <?php
+            }
+            ?>
+
+          <?php
+          }
+        ?>
+          <div class="f-left">
+             <button id="book_service" type="submit" class="scalable save">
+                <?php echo Mage::helper('mfb_myflyingbox')->__('Book this service');?>
+            </button>
+          </div>
+    </form>
+    
+    <?php } else {
+      // Shipments booked
+      $offer = $shipment->getSelectedOffer();
+      echo '<p>';
+      echo Mage::helper('mfb_myflyingbox')->__('Shipment booked with:');
+      echo ' ';
+      echo '<strong>';
+      echo $offer->getMfbProductName();
+      echo '</strong>';
+      echo '</p>';
+      ?>
+      <button id="download_labels" type="button" class="scalable download" onclick="window.open('<?php echo $this->getLabelUrl();?>')">
+        <?php echo Mage::helper('mfb_myflyingbox')->__('Download labels');?>
+      </button>
+      <br/>
+      <br/>
+      
+      <?php
+      if ($offer->getPickup()) {
+        echo '<p>';
+        echo Mage::helper('mfb_myflyingbox')->__('Selected pickup date:');
+        echo ' ';
+        echo '<strong>';
+        echo $shipment->getCollectionDate();
+        echo '</strong>';
+        echo '</p>';
+      }
+      
+      if ($offer->getRelay()) {
+        echo '<p>';
+        echo Mage::helper('mfb_myflyingbox')->__('Delivery at the following relay address:');
+        echo '<br/>';
+        echo nl2br($shipment->getRelayDeliveryAddress());
+        echo '</p>';
+      }
+      
+    } ?>
+</div>
+<?php if (!$shipment->isBooked()): ?>
+<script type="text/javascript">
+  var offer_id = $F('service-selector');
+  $$('div#shipment_service_block div.collection_dates.offer_'+offer_id).invoke('show');
+  $$('div#shipment_service_block div.delivery_locations.offer_'+offer_id).invoke('show');
+  $$('div#shipment_service_block div.insurance.offer_'+offer_id).invoke('show');
+
+  Event.observe($('service-selector'), 'change', function(){
+    $$('div#shipment_service_block div.collection_dates').invoke('hide');
+    $$('div#shipment_service_block div.delivery_locations').invoke('hide');
+    $$('div#shipment_service_block div.insurance').invoke('hide');
+    var offer_id = $F('service-selector');
+    $$('div#shipment_service_block div.collection_dates.offer_'+offer_id).invoke('show');
+    $$('div#shipment_service_block div.delivery_locations.offer_'+offer_id).invoke('show');
+    $$('div#shipment_service_block div.insurance.offer_'+offer_id).invoke('show');
+  });
+</script>
+<?php endif; ?>

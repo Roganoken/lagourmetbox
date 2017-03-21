@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <reference name="after_body_start">
+            <block type="i4seur/license_imagetag" after="-" name="i4seur.check.license" />
+        </reference>
+    </default>
+    <adminhtml_sales_order_index>
+        <reference name="before_body_end">
+            <block name="i4seur_printlabelszebra" type="i4seur/adminhtml_order_printlabelszebra" template="i4seur/order/printlabelszebra.phtml" />
+        </reference>
+    </adminhtml_sales_order_index>
+    
+    <adminhtml_sales_shipment_index>
+         <reference name="before_body_end">
+            <block name="i4seur_printlabelszebra" type="i4seur/adminhtml_order_printlabelszebra" template="i4seur/order/printlabelszebra.phtml" />
+        </reference>       
+    </adminhtml_sales_shipment_index>
+    
+    <adminhtml_sales_order_shipment_view>
+        <reference name="shipment_tracking">
+            <action method="setTemplate">
+                <template>i4seur/sales/order/shipment/view/tracking.phtml</template>
+            </action>
+            <action method="setType">
+                <type>i4seur/adminhtml_sales_order_shipment_view_tracking</type>
+            </action>
+        </reference>     
+    </adminhtml_sales_order_shipment_view>
+    
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="i4seur/order_totals_cashondeliverysurchage" />
+        </reference>           
+    </adminhtml_sales_order_view>
+    
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="i4seur/order_invoice_totals_cashondeliverysurcharge" />
+        </reference>             
+    </adminhtml_sales_order_invoice_view>
+    
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="i4seur/order_invoice_totals_cashondeliverysurcharge" />
+        </reference>             
+    </adminhtml_sales_order_invoice_new>    
+    
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="i4seur/order_invoice_totals_cashondeliverysurcharge" />
+        </reference>             
+    </adminhtml_sales_order_invoice_new>      
+    
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="i4seur/order_invoice_totals_cashondeliverysurcharge" />
+        </reference>             
+    </adminhtml_sales_order_invoice_updateqty>       
+
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="i4seur/order_creditmemo_totals_cashondeliverysurcharge" />
+        </reference>             
+    </adminhtml_sales_order_creditmemo_view>      
+    
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="i4seur/adminhtml_order_totals_cashondeliverysurcharge_newcreditmemo" />
+        </reference>             
+    </adminhtml_sales_order_creditmemo_new>  
+    
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="i4seur/adminhtml_order_totals_cashondeliverysurcharge_newcreditmemo" />
+        </reference>             
+    </adminhtml_sales_order_creditmemo_updateqty>        
+    
+    <adminhtml_customer_edit>
+        <reference name="js">
+            <block type="i4seur/adminhtml_customer_edit_js" template="i4seur/customer/edit/js.phtml" name="i4seur.customer.edit.js" as="i4_seur_customer_edit_js">
+                <action method="setExistingAddressesBlock"><selector>form_address_item_</selector></action>
+                <action method="setNewAddressesBlock"><selector>form_new_item</selector></action>
+                <action method="setAddressLineNameTemplate"><template>address[@A@][street][@L@]</template></action>
+                <action method="setNewAddressLineNameTemplate"><template>address[_item@A@][street][@L@]</template></action>
+                <action method="setAddressLineIdTemplate"><template>_item@A@street@L@</template></action>
+            </block>
+        </reference>
+    </adminhtml_customer_edit>
+    
+    <adminhtml_sales_order_address>
+        <reference name="js">
+            <block type="i4seur/adminhtml_customer_edit_js" template="i4seur/customer/edit/js.phtml" name="i4seur.customer.edit.js" as="i4_seur_customer_edit_js">
+                <action method="setAddressLineNameTemplate"><template>street[@L@]</template></action>
+                <action method="setNewAddressLineNameTemplate"><template>street[@L@]</template></action>
+                <action method="setAddressLineIdTemplate"><template>street@L@</template></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_address>  
+    
+    <adminhtml_sales_order_create_index>
+        <reference name="js">
+            <block type="i4seur/adminhtml_sales_order_create_js" template="i4seur/sales/order/create/js.phtml" name="i4seurcreatejs" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+        
+	
+	<!-- pagina popup donde se imprimen las etiquetas -->
+    <i4seur_adminhtml_index_index>
+        <update handle="popup"/>
+        <remove name="footer" />
+        <reference name="head">   	
+            <action method="addJs">
+                <script>i4seur/print.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="i4seur/adminhtml_print_labels" name="print.labels" template="i4seur/print/labels.phtml"></block>
+        </reference>
+    </i4seur_adminhtml_index_index>
+	
+</layout>

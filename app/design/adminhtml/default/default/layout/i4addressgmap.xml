@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+   <adminhtml_sales_order_shipment_new>
+        <reference name="order_info">
+        	<action method="setTemplate" ifconfig="i4addressgmap/general/show_shipment_map" ifvalue="1"><template>i4addressgmap/sales/order/view/info.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+    
+    <adminhtml_sales_order_shipment_view>
+        <reference name="order_info">
+        	<action method="setTemplate" ifconfig="i4addressgmap/general/show_shipment_map" ifvalue="1"><template>i4addressgmap/sales/order/view/info.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+</layout>

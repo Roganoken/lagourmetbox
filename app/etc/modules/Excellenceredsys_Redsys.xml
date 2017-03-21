@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Excellenceredsys_Redsys>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Excellenceredsys_Redsys>
+    </modules>
+
+</config> 

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <checkout_onepage_index>
+    	<reference name="head">   	
+    	    <block type="core/text" name="googleapi-meta-viewport"><action method="setText"><text><![CDATA[<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>]]></text></action></block>
+            <block type="core/text" name="jquery-min"><action method="setText"><text><![CDATA[
+        		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+        	]]></text></action></block>
+            <block type="i4localresourcehtmltag/scriptjs" name="i4js-conflict" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/jquery-noconflict.js</src>
+                </action>
+            </block>  
+        	
+        	<block type="core/text" name="googleapi"><action method="setText"><text><![CDATA[
+            	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&language=es&region=ES"></script>
+            ]]></text></action></block>
+
+            <block type="i4localresourcehtmltag/scriptjs" name="markerlabels" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/markerwithlabel.js</src>
+                </action>
+            </block>     
+            
+            <block type="i4localresourcehtmltag/scriptjs" name="pointschooser" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/pointschooser.js</src>
+                </action>
+            </block>     
+             
+            
+            <action method="addCss"><stylesheet>css/i4addressgmap.css</stylesheet></action>
+            
+            <action method="addJs"><script>prototype/window.js</script></action>
+	       	<action method="addCss"><name>i4addressgmap/windows/themes/default.css</name></action>
+	       		
+        </reference>
+        <reference name="before_body_end">
+        	<block type="core/text" name="map_canvas">
+        		<action method="setText"><text><![CDATA[
+        			<div id="popup" style="display:none;text-align:left;padding: 4px;overflow:hidden">
+						<div id="map" class="map" style="width:400px;height:300px;"></div>
+					</div>
+        		]]></text></action>
+        	</block>
+        	
+        	<block type="core/text" name="jquery-ui"><action method="setText"><text><![CDATA[
+        		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        	]]></text></action></block>
+       		
+            <block type="i4localresourcehtmltag/scriptjs" name="opc_map" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/onepagecheckout.js</src>
+                </action>
+            </block>  
+            
+        </reference>
+    </checkout_onepage_index>
+    
+    <gomage_checkout_onepage_index>
+    	<reference name="head">   	               
+                
+    	    <block type="core/text" name="googleapi-meta-viewport"><action method="setText"><text><![CDATA[<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>]]></text></action></block>
+            <block type="core/text" name="jquery-min"><action method="setText"><text><![CDATA[
+        		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+        	]]></text></action></block>
+            <block type="i4localresourcehtmltag/scriptjs" name="i4js-conflict" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/jquery-noconflict.js</src>
+                </action>
+            </block>  
+        	
+        	<block type="core/text" name="googleapi"><action method="setText"><text><![CDATA[
+            	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&language=es&region=ES"></script>
+            ]]></text></action></block>
+
+            <block type="i4localresourcehtmltag/scriptjs" name="markerlabels" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/markerwithlabel.js</src>
+                </action>
+            </block>     
+            
+            <block type="i4localresourcehtmltag/scriptjs" name="pointschooser" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/pointschooser.js</src>
+                </action>
+            </block>     
+             
+            
+            <action method="addCss"><stylesheet>css/i4addressgmap.css</stylesheet></action>
+            
+            <action method="addJs"><script>prototype/window.js</script></action>
+	       	<action method="addCss"><name>i4addressgmap/windows/themes/default.css</name></action>                
+                
+                
+	       		
+        </reference>
+    	<reference name="before_body_end">
+        	<block type="core/text" name="map_canvas">
+        		<action method="setText"><text><![CDATA[
+        			<div id="popup" style="display:none;text-align:left;padding: 4px;overflow:hidden">
+						<div id="map" class="map" style="width:400px;height:300px;"></div>
+					</div>
+        		]]></text></action>
+        	</block>
+        	
+        	<block type="core/text" name="jquery-ui"><action method="setText"><text><![CDATA[
+        		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        	]]></text></action></block>
+       		
+            <block type="i4localresourcehtmltag/scriptjs" name="opc_map" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/gomagecheckout.js</src>
+                </action>
+            </block>  
+        </reference>
+    </gomage_checkout_onepage_index>
+    
+    
+    <onestepcheckout_index_index>
+    	<reference name="head">
+     	    <block type="core/text" name="googleapi-meta-viewport"><action method="setText"><text><![CDATA[<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>]]></text></action></block>
+
+            <block type="core/text" name="jquery-min"><action method="setText"><text><![CDATA[
+        		<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+        	]]></text></action></block>
+            <block type="i4localresourcehtmltag/scriptjs" name="i4js-conflict" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/jquery-noconflict.js</src>
+                </action>
+            </block>
+
+        	<block type="core/text" name="googleapi"><action method="setText"><text><![CDATA[
+            	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&language=es&region=ES"></script>
+            ]]></text></action></block>
+
+            <block type="i4localresourcehtmltag/scriptjs" name="markerlabels" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/markerwithlabel.js</src>
+                </action>
+            </block>
+
+            <block type="i4localresourcehtmltag/scriptjs" name="pointschooser" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/pointschooser.js</src>
+                </action>
+            </block>
+
+            <!-- No estamos usando el CSS -->
+            <action method="addCss"><stylesheet>css/i4addressgmap.css</stylesheet></action>
+            <!-- -->
+
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <!-- No estamos usando el CSS -->
+	       	<action method="addCss"><name>i4addressgmap/windows/themes/default.css</name></action>
+	    <!--   	-->
+
+        </reference>
+    	<reference name="before_body_end">
+        	<block type="core/text" name="map_canvas">
+        		<action method="setText"><text><![CDATA[
+        			<div id="popup" style="display:none;text-align:left;padding: 4px;overflow:hidden">
+						<div id="map" class="map" style="width:400px;height:300px;"></div>
+					</div>
+        		]]></text></action>
+        	</block>
+
+        	<block type="core/text" name="jquery-ui"><action method="setText"><text><![CDATA[
+        		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+        	]]></text></action></block>
+
+            <block type="i4localresourcehtmltag/scriptjs" name="opc_map" >
+                <action method="setSrcInJsFolder">
+                    <src>i4addressgmap/gomagecheckout.js</src>
+                </action>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+    
+</layout>

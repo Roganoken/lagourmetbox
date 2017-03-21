@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mfb_Myflyingbox extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category       Mfb
+ * @package        Mfb_Myflyingbox
+ * @copyright      Copyright (c) 2015
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config>
+    <modules>
+        <Mfb_Myflyingbox>
+            <version>1.0.7</version>
+        </Mfb_Myflyingbox>
+    </modules>
+    <global>
+        <events>
+            <sales_quote_collect_totals_before>
+                <observers>
+                    <mfb_myflyingbox>
+                        <type>singleton</type>
+                        <class>mfb_myflyingbox/observer</class>
+                        <method>salesQuoteCollectTotalsBefore</method>
+                    </mfb_myflyingbox>
+                </observers>
+            </sales_quote_collect_totals_before>
+            <core_block_abstract_prepare_layout_before>
+            <observers>
+                <mfb_core_block_abstract_prepare_layout_before>
+                    <type>singleton</type>
+                    <class>mfb_myflyingbox/observer</class>
+                    <method>addMassActionMFB</method>
+                </mfb_core_block_abstract_prepare_layout_before>
+            </observers>
+        </core_block_abstract_prepare_layout_before>
+        </events>
+        <resources>
+            <mfb_myflyingbox_setup>
+                <setup>
+                    <module>Mfb_Myflyingbox</module>
+                    <class>Mfb_Myflyingbox_Model_Resource_Setup</class>
+                </setup>
+            </mfb_myflyingbox_setup>
+        </resources>
+        <blocks>
+            <mfb_myflyingbox>
+                <class>Mfb_Myflyingbox_Block</class>
+            </mfb_myflyingbox>
+        </blocks>
+        <helpers>
+            <mfb_myflyingbox>
+                <class>Mfb_Myflyingbox_Helper</class>
+            </mfb_myflyingbox>
+        </helpers>
+        <models>
+            <mfb_myflyingbox>
+                <class>Mfb_Myflyingbox_Model</class>
+                <resourceModel>mfb_myflyingbox_resource</resourceModel>
+            </mfb_myflyingbox>
+            <mfb_myflyingbox_resource>
+                <class>Mfb_Myflyingbox_Model_Resource</class>
+                <entities>
+                    <dimension>
+                        <table>mfb_myflyingbox_dimension</table>
+                    </dimension>
+                    <shipment>
+                        <table>mfb_myflyingbox_shipment</table>
+                    </shipment>
+                    <quote>
+                        <table>mfb_myflyingbox_quote</table>
+                    </quote>
+                    <offer>
+                        <table>mfb_myflyingbox_offer</table>
+                    </offer>
+                    <parcel>
+                        <table>mfb_myflyingbox_parcel</table>
+                    </parcel>
+                    <service>
+                        <table>mfb_myflyingbox_service</table>
+                    </service>
+                </entities>
+            </mfb_myflyingbox_resource>
+        </models>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <mfb_myflyingbox>
+                    <file>mfb_myflyingbox.xml</file>
+                </mfb_myflyingbox>
+            </updates>
+        </layout>
+        <events>
+            <adminhtml_widget_container_html_before>
+                <observers>
+                    <mfb_myflyingbox>
+                        <class>mfb_myflyingbox/observer</class>
+                        <type>singleton</type>
+                        <method>addOrderViewShipButton</method>
+                    </mfb_myflyingbox>
+                </observers>
+            </adminhtml_widget_container_html_before>
+        </events>
+        <translate>
+            <modules>
+                <Mfb_Myflyingbox>
+                    <files>
+                        <default>Mfb_Myflyingbox.csv</default>
+                    </files>
+                </Mfb_Myflyingbox>
+            </modules>
+        </translate>
+        <global_search>
+            <shipment>
+                <class>mfb_myflyingbox/adminhtml_search_shipment</class>
+                <acl>mfb_myflyingbox</acl>
+            </shipment>
+        </global_search>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Mfb_Myflyingbox before="Mage_Adminhtml">Mfb_Myflyingbox_Adminhtml</Mfb_Myflyingbox>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <!-- Default configuration -->
+  <default>
+      <carriers>
+          <mfb_myflyingbox>
+              <active>1</active>
+              <!--
+                   This configuration should not be made visible
+                   to the administrator, because it specifies
+                   the model to be used for this carrier.
+              -->
+              <model>mfb_myflyingbox/carrier</model>
+              <!--
+                  The title as referenced in the carrier class
+              -->
+              <title>Available shipping methods</title>
+              <!--
+                  The sort order specifies the position that
+                  this carrier appears relative to the other
+                  carriers available in checkout.
+              -->
+              <sort_order>10</sort_order>
+              <!--
+                  Out of the box, Magento offers shipping
+                  carriers the ability to restrict themselves
+                  to specific countries. For this configuration
+                  option, 0 means allow all countries available,
+                  and 1 means allow all countries specified
+                  in the country list that we will add later
+                  in system.xml
+              -->
+              <sallowspecific>0</sallowspecific>
+          </mfb_myflyingbox>
+      </carriers>
+  </default>
+</config>

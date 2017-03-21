@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+			<block type="page/html" name="baseurl" template="mondialrelay/header.phtml" />
+			<action method="addJs"><script>jquery/jquery-1.9.1.min.js</script></action>
+			<action method="addJs"><script>jquery/jquery.noconflict.js</script></action>
+			<action method="addJs"><script>mondialrelay/jquery.plugin.mondialrelay.parcelshoppicker.2.0.0.js</script></action>
+			<action method="addJs"><script>mondialrelay/mondialrelay.js</script></action>            
+			<!--action method="addItem"><type>skin_css</type><name>css/mondialrelay/mondialrelay.css</name></action-->
+        </reference>
+    </default>
+    <checkout_onepage_index>
+		<reference name="checkout.onepage.shipping_method">
+			<block type="checkout/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="mondialrelay/checkout/onepage/shipping_method/available.phtml"/>
+            <block type="checkout/onepage_shipping_method_additional" name="checkout.onepage.shipping_method.additional" as="additional" template="mondialrelay/checkout/onepage/shipping_method/additional.phtml"/>
+		</reference>
+	</checkout_onepage_index>
+</layout>

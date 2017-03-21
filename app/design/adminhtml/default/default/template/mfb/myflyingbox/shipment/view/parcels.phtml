@@ -1,0 +1,106 @@
+<div id="shipment_parcels_block">
+<?php $shipment = $this->getShipment(); ?>
+  <div id="parcels-list">
+    <?php foreach($shipment->getParcels() as $parcel) {
+    
+      echo "<p>";
+      
+      if ($shipment->canEdit()) {
+      ?>
+      <form action="<?php echo $this->getDeleteUrl($parcel->getId()); ?>" method="POST">
+      <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+      <button id="delete_parcel_<?php echo $parcel->getId();?>" type="submit" class="scalable delete">
+        <?php echo Mage::helper('mfb_myflyingbox')->__('Delete');?>
+      </button>
+      </form>
+      <?php
+      }
+      $tracking_number = $parcel->getTrackingNumber();
+      if ($shipment->isBooked() && !empty($tracking_number)) {
+        echo '<strong>';
+        echo $parcel->getTrackingNumber();
+        echo '</strong> - ';
+        echo ' <a href="#" onclick="popWin(\''. $this->getPopUpUrl($parcel->getId()) .'\',\'trackorder\',\'width=800,height=600,resizable=yes,scrollbars=yes\');"> Details</a> ';
+        $tracking_info = $this->getParcelInfo($parcel);
+        //Exploiter l'affichage
+      }
+      
+      echo $parcel->getLength()."x".$parcel->getWidth()."x".$parcel->getHeight()."cm, ".$parcel->getWeight()."kg";
+      echo " | ";
+      echo $parcel->getFormattedValue();
+      echo " | Assur. value :";
+      echo $parcel->getInsurableValue()/100;
+      echo " | ";
+      echo $parcel->getDescription();
+      echo " (";
+      echo $parcel->getCountryOfOrigin();
+      echo ")";
+
+
+      echo "</p>";
+      
+    }?>
+  
+  </div>
+  <?php if ($this->getShipment()->canEdit()) { ?>
+  <br/><br/>
+    <div id="parcel_form" class="shipment-parcel-form">
+    <p><strong><?php echo Mage::helper('mfb_myflyingbox')->__('Add another parcel:');?></strong></p>
+    
+    
+      <form id="parcel-form" action="<?php echo $this->getSubmitUrl(); ?>" method="post">
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+        
+          <span class="field-row">
+            <label for="parcel_length"><?php echo Mage::helper('mfb_myflyingbox')->__('Parcel dimensions/weight:');?></label>
+            <input id="parcel_length" type='text' class="input-text required-field validate-digits" style="width: 50px;" name="parcel[length]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('length');?>"/>x
+            <input id="parcel_width" type='text' class="input-text required-field validate-digits" style="width: 50px;"  name="parcel[width]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('width');?>"/>x
+            <input id="parcel_height" type='text' class="input-text required-field validate-digits" style="width: 50px;"  name="parcel[height]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('height');?>"/>cm
+
+            <input id="parcel_weight" type='text' class="input-text required-field validate-number" style="width: 50px;"  name="parcel[weight]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('weight');?>"/>kg
+          </span>
+
+          <span class="field-row">
+            <label for="parcel_description"><?php echo Mage::helper('mfb_myflyingbox')->__('Content description:');?></label>
+            <input id="parcel_description" type='text' class="input-text required-field" style="width: 150px;"  name="parcel[description]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('content description');?>"/>
+          </span>
+          <span class="field-row">
+            <label for="parcel_value"><?php echo Mage::helper('mfb_myflyingbox')->__('Content value:');?></label>
+            <input id="parcel_value" type='text' class="input-text required-field validate-number" style="width: 50px;"  name="parcel[value]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('value');?>"/>
+            <select name="parcel[currency]">
+              <option value="1">EUR (€)</option>
+              <option value="2">USD ($)</option>
+              <option value="3">GBP (£)</option>
+            </select>
+          </span>
+          <span class="field-row">
+            <label for="parcel_insurable_value"><?php echo Mage::helper('mfb_myflyingbox')->__('Insurable value:');?></label>
+            <input id="parcel_insurable_value" type='text' class="input-text required-field validate-number" style="width: 50px;"  name="parcel[insurable_value]" value="" placeholder="<?php echo Mage::helper('mfb_myflyingbox')->__('insurable value');?>"/>
+          </span>
+          
+          <span class="field-row">
+          <label for="parcel_origin"><?php echo Mage::helper('mfb_myflyingbox')->__('Origin of the goods:');?></label>
+            <select id="parcel_origin" name="parcel[country_of_origin]">
+              <?php
+                foreach(Mage::getResourceModel('directory/country_collection')->toOptionArray() as $country) {
+                  echo '<option value="'.$country['value'].'">'. $country['label'].'</option>';
+                }
+              ?>
+            </select>
+          </span>
+          
+          <div class="f-right">
+             <button id="add_new_parcel" type="submit" class="scalable save">
+                <?php echo Mage::helper('mfb_myflyingbox')->__('Add new parcel');?>
+            </button>
+          </div>
+      </form>
+    </div>
+    <?php }?>
+</div>
+
+<?php if ($this->getShipment()->canEdit()): ?>
+  <script type="text/javascript">
+      var parcelsForm = new varienForm('parcel-form');
+  </script>
+<?php endif; ?>

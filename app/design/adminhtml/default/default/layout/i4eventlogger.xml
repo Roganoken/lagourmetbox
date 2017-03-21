@@ -1,0 +1,14 @@
+
+<layout>
+    <i4eventlogger_adminhtml_log_index>
+        <reference name="content">
+            <block type="i4eventlogger/adminhtml_log" name="tablerates">
+            </block>
+        </reference>
+    </i4eventlogger_adminhtml_log_index>
+    <i4tablerates_adminhtml_log_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+        </block>
+  
+    </i4tablerates_adminhtml_log_grid>
+</layout>
