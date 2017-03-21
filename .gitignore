@@ -1,3 +1,3 @@
-magento/app/etc/local.xml
-magento/media
-magento/var
+/var/
+/media/
+/app/etc/local.xml
