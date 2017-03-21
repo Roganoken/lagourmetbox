@@ -1,4 +1,3 @@
-.gitignore
 magento/app/etc/local.xml
 magento/media
 magento/var
