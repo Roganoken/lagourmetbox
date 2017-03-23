@@ -132,6 +132,10 @@
         </reference>
     </customer_logged_out>
     <customer_account>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/intlTelInput/intlTelInput.css</name><params/></action> 
+            <action method="addItem"><type>skin_js</type><name>js/intlTelInput/intlTelInput.js</name></action>
+        </reference>
         <reference name="left">
             <action method="unsetChild"><name>cart_sidebar</name></action>
         </reference>
@@ -470,6 +474,10 @@
     </checkout_cart_index>
     <checkout_onepage_index>
         <remove name="breadcrumbs"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/intlTelInput/intlTelInput.css</name><params/></action> 
+            <action method="addItem"><type>skin_js</type><name>js/intlTelInput/intlTelInput.js</name></action>
+        </reference>
     </checkout_onepage_index>
     <onepagecheckout_index_index>
         <reference name="breadcrumbs">

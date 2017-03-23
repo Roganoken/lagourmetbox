@@ -136,6 +136,18 @@
 </form>
 <script type="text/javascript">
 //<![CDATA[
+    jQuery(document).ready(function() {
+        jQuery("#telephone").intlTelInput({
+            autoPlaceholder: "aggressive",
+            preferredCountries: ['es', 'fr', 'gb'],
+            formatOnDisplay: true,
+            utilsScript: "<?php echo $this->getSkinUrl('js/intlTelInput/utils.js');?>"
+        });
+        jQuery(document).on('keyup','#telephone', function() {
+            if( this.value.length < 3 ) return;
+            jQuery("#telephone").val(jQuery("#telephone").intlTelInput("getNumber"));
+        });
+    });
     var dataForm = new VarienForm('form-validate', true);
     //dataForm.setElementsRelation('country', 'state', '<?php echo $this->getUrl('directory/json/childRegion') ?>');
     new RegionUpdater('country', 'region', 'region_id', countryRegions, undefined, 'zip');

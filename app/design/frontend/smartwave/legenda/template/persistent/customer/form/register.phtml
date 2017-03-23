@@ -183,6 +183,20 @@
     </form>
     <script type="text/javascript">
     //<![CDATA[
+        <?php if($this->getShowAddressFields()): ?>
+            jQuery(document).ready(function() {
+                jQuery("#telephone").intlTelInput({
+                    autoPlaceholder: "aggressive",
+                    preferredCountries: ['es', 'fr', 'gb'],
+                    formatOnDisplay: true,
+                    utilsScript: "<?php echo $this->getSkinUrl('js/intlTelInput/utils.js');?>"
+                });
+                jQuery(document).on('keyup','#telephone', function() {
+                    if( this.value.length < 3 ) return;
+                    jQuery("#telephone").val(jQuery("#telephone").intlTelInput("getNumber"));
+                });
+            });
+        <?php endif; ?>
         var dataForm = new VarienForm('form-validate', true);
         <?php if($this->getShowAddressFields()): ?>
         new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
