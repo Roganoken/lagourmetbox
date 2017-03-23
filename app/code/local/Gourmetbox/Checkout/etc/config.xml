@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Gourmetbox_Checkout>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </Gourmetbox_Checkout>
     </modules>
     <global>
