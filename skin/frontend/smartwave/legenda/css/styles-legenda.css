@@ -5586,7 +5586,9 @@ tr.summary-details-excluded {
   padding: 15px;
   border: 1px solid #ebebeb;
   margin-top: -1px;
-  cursor: default; }
+  cursor: default;
+  background-color: white;
+}
   .opc .step-title h2 {
     font-size: 18px;
     margin-bottom: 0; }

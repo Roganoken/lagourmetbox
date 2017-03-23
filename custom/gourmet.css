@@ -313,6 +313,13 @@ border-bottom:3px solid #E4DCD2;
     color: rgba(255,0,0,0.7);
 }
 
+.opc-custom-message .prioritymsg {
+    background: white;
+    padding: 20px;
+    color: #D27C4A;
+    border: 1px solid #ebebeb;
+}
+
 .cart-tax-total {
 	display: table-cell;
 }
