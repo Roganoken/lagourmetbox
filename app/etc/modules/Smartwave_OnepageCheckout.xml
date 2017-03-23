@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Smartwave_OnepageCheckout>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Smartwave_OnepageCheckout>
     </modules>

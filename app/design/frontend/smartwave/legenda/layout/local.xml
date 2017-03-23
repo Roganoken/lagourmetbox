@@ -469,16 +469,7 @@
         </reference>
     </checkout_cart_index>
     <checkout_onepage_index>
-        <reference name="breadcrumbs">
-            <action method="addCrumb" translate="crumbName">
-                <crumbName>Home</crumbName>
-                <params helper="legenda/getHomeUrl" />
-            </action>
-            <action method="addCrumb" translate="label title crumbName">
-                <crumbName>Checkout</crumbName>
-                <crumbInfo><label>Checkout</label><title>Checkout</title></crumbInfo>
-            </action>
-        </reference>
+        <remove name="breadcrumbs"/>
     </checkout_onepage_index>
     <onepagecheckout_index_index>
         <reference name="breadcrumbs">
