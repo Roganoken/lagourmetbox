@@ -97,6 +97,13 @@ class Smartwave_OnepageCheckout_IndexController extends Mage_Checkout_Controller
             $this->_redirect('checkout/cart');
             return;
         }
+        
+        if (!Mage::helper('onepagecheckout')->isOnepageCheckoutEnabled()
+                && Mage::helper('checkout')->canOnepageCheckout())
+        {
+            $this->_redirect('checkout/onepage');
+            return;
+        }
                 
         $quote = $this->getOnepagecheckout()->getQuote();
         if (!$quote->hasItems() || $quote->getHasError()) {
