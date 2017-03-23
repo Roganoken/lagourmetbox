@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gourmetbox_Checkout>
+            <version>1.0.0</version>
+        </Gourmetbox_Checkout>
+    </modules>
+    <global>
+        <models>
+            <gourmetbox_checkout>
+                <class>Gourmetbox_Checkout_Model</class>
+            </gourmetbox_checkout>
+        </models>
+        <helpers>
+            <gourmetbox_checkout>
+                <class>Gourmetbox_Checkout_Helper</class>
+            </gourmetbox_checkout>
+        </helpers>
+        <resources>
+            <gourmetbox_checkout_setup>
+                <setup>
+                    <module>Gourmetbox_Checkout</module>
+                </setup>
+            </gourmetbox_checkout_setup>
+        </resources>
+    </global>
+    <frontend>
+        <translate>
+            <modules>
+                <Mage_Checkout>
+                    <files>
+                        <gourmetbox_checkout>Gourmetbox_Checkout.csv</gourmetbox_checkout>
+                    </files>
+                </Mage_Checkout>
+            </modules>
+        </translate>
+    </frontend>
+</config>
+

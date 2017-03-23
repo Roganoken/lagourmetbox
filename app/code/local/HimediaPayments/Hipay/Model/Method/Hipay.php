@@ -175,8 +175,6 @@ class HimediaPayments_Hipay_Model_Method_Hipay extends Mage_Payment_Model_Method
             }
         }
         $available = $checkResult->isAvailable;
-
-    	Mage::log("isAvailable: " . (int)$available);
     	
     	return $available;
     }

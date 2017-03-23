@@ -5648,16 +5648,13 @@ tr.summary-details-excluded {
   border-top: 0; }
 
 .opc .gift-messages-form {
-  margin: 0 -30px;
   background: #f6f1eb;
   border: 1px solid #e9e4de;
   border-width: 1px 0;
   padding: 22px 24px 22px 30px; }
 
 .opc .gift-messages-form .inner-box {
-  padding: 5px;
-  height: 260px;
-  overflow: auto; }
+  padding: 5px; }
 
 #opc-review .product-name {
   font-size: 15px;

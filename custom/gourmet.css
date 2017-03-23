@@ -353,7 +353,8 @@ border-bottom:3px solid #E4DCD2;
 	color: #594C3C;
 }
 
-.onepagecheckout_datafields .sp-methods dt span{
+.onepagecheckout_datafields .sp-methods dt span,
+#opc-shipping_method .sp-methods dt span {
 	text-transform: initial;
 	display: block;
 	font-size: 10px;
@@ -363,7 +364,8 @@ border-bottom:3px solid #E4DCD2;
 	font-family: 'Libre Baskerville', serif;
 }
 
-.onepagecheckout_datafields .sp-methods dt span b{
+.onepagecheckout_datafields .sp-methods dt span b,
+#opc-shipping_method .sp-methods dt span b {
 	font-weight:700!important;
 	font-size: 12px;
 }
@@ -376,24 +378,36 @@ border-bottom:3px solid #E4DCD2;
 	color: #e87403;
 }
 
-#onepagecheckout_orderform .op_warning{
-	color: red;
+#checkoutSteps .allow h2:hover {
+    cursor: pointer;
+}
+
+#onepagecheckout_orderform .op_warning,
+#delivery_warning,
+#checkout-step-shipping .op_warning {
+    color: red;
     font-size: 0.9em;
     margin-bottom: 10px;
 }
 
-.onepagecheckout_datafields .sp-methods dt{
+.onepagecheckout_datafields .sp-methods dt {
 	font-size: 14px;
 	border-top: 1px solid #DDD;
 	padding-top: 5px;
 }
 
-.onepagecheckout_datafields .sp-methods label{
-	font-size: 10px;
+#opc-shipping_method .sp-methods dt {
+    font-size: 14px;
+}
+
+.onepagecheckout_datafields .sp-methods label,
+#opc-shipping_method .sp-methods label {
+	font-size: 12px;
 	display: inline-block;
 }
 
-.onepagecheckout_datafields .sp-methods label .prdiv{
+.onepagecheckout_datafields .sp-methods label .prdiv,
+#opc-shipping_method .sp-methods label .prdiv {
 	font-size: 11px;
 	float: left;
 	display: block;
@@ -401,14 +415,21 @@ border-bottom:3px solid #E4DCD2;
 	padding: 0px;
 }
 
-.onepagecheckout_datafields .sp-methods label .prdivln1{
+.onepagecheckout_datafields .sp-methods label .prdivln1,
+#opc-shipping_method .sp-methods label .prdivln1 {
 	font-size: 10px;
 	font-weight: normal;
 	display: block;
 	line-height: 1.3em;
 }
 
-.onepagecheckout_datafields .sp-methods label .price{
+.onepagecheckout_datafields .sp-methods label .prdivln1 a,
+#opc-shipping_method .sp-methods label .prdivln1 a {
+    text-decoration: underline;
+}
+
+.onepagecheckout_datafields .sp-methods label .price,
+#opc-shipping_method .sp-methods label .price {
 	font-size: 14px;
 	line-height: 21px;
 	margin-left: 10px;
