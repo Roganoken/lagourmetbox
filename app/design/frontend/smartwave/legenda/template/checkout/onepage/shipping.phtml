@@ -111,7 +111,7 @@
                                 <em>*</em> <?php echo $this->__('Telephone GBD') ?>
                             </label>
                             <div class="input-box">
-                                <input type="text" name="shipping[telephone]" id="shipping:telephone" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone GBD') ?>" class="input-text<?php if($phone_r === 'required') { echo ' required-entry ';}?>" onchange="shipping.setSameAsBilling(false);" placeholder="<?php echo $this->__('Telephone') ?>"/>
+                                <input type="text" name="shipping[telephone]" id="shipping-phone" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone GBD') ?>" class="input-text required-entry" onchange="shipping.setSameAsBilling(false);"/>
                             </div>
                         </div>
                     </li>
@@ -139,6 +139,19 @@
 </form>
 <script type="text/javascript">
 //<![CDATA[
+    jQuery(document).ready(function() {
+        jQuery("#shipping-phone").intlTelInput({
+            autoPlaceholder: "aggressive",
+            preferredCountries: ['es', 'fr', 'gb'],
+            formatOnDisplay: true,
+            utilsScript: "<?php echo $this->getSkinUrl('js/intlTelInput/utils.js');?>"
+        });
+        jQuery(document).on('keyup','#shipping-phone', function() {
+            if( this.value.length < 3 ) return;
+            jQuery("#shipping-phone").val(jQuery("#shipping-phone").intlTelInput("getNumber"));
+        });
+    });
+    
     var shipping = new Shipping('co-shipping-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveShipping') ?>',
         '<?php echo $this->getUrl('checkout/onepage/shippingMethod') ?>');
     var shippingForm = new VarienForm('co-shipping-form');

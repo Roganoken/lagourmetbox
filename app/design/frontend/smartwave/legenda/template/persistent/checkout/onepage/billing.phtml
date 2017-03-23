@@ -112,7 +112,7 @@
                             <em>*</em><?php echo $this->__('Telephone GB') ?>
                         </label>
                         <div class="input-box">
-                            <input type="text" name="billing[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text<?php if($phone_r === 'required') { echo ' required-entry ';}?>" id="billing:telephone" placeholder="<?php echo $this->__('Telephone')?>"/>
+                            <input type="text" name="billing[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing-phone"/>
                         </div>
                     </div>
                 </li>
@@ -189,6 +189,19 @@
 </form>
 <script type="text/javascript">
 //<![CDATA[
+    jQuery(document).ready(function() {
+        jQuery("#billing-phone").intlTelInput({
+            autoPlaceholder: "aggressive",
+            preferredCountries: ['es', 'fr', 'gb'],
+            formatOnDisplay: true,
+            utilsScript: "<?php echo $this->getSkinUrl('js/intlTelInput/utils.js');?>"
+        });
+        jQuery(document).on('keyup','#billing-phone', function() {
+            if( this.value.length < 3 ) return;
+            jQuery("#billing-phone").val(jQuery("#billing-phone").intlTelInput("getNumber"));
+        });
+    });
+
     var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');
     var billingForm = new VarienForm('co-billing-form');
 
