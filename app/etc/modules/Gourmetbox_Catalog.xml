@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <modules>
+        <Gourmetbox_Catalog>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Gourmetbox_Catalog>
+    </modules>
+</config>
+
