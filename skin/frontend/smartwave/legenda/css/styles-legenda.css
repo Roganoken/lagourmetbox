@@ -7444,3 +7444,7 @@ ul.list-arrow li:hover {
 .intl-tel-input {
     width: 100%;
 }
+
+.sp-methods .method-radio {
+    width: 20px;
+}

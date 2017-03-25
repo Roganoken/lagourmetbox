@@ -2,7 +2,7 @@
 <config>
     <modules>
         <WIC_Mondialrelay>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </WIC_Mondialrelay>
     </modules>
