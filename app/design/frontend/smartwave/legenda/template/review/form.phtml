@@ -73,6 +73,7 @@
                         </li>
                     </ul>
                 </fieldset>
+                <?php echo $this->getLayout()->createBlock('studioforty9_recaptcha/explicit')->setTemplate('studioforty9/recaptcha/explicit.phtml')->toHtml(); ?>
                 <div class="buttons-set right">
                     <button type="submit" title="<?php echo $this->__('Submit Review') ?>" class="button"><span><span><?php echo $this->__('Submit Review') ?></span></span></button>
                 </div>

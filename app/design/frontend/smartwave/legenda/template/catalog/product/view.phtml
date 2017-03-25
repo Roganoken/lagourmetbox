@@ -97,15 +97,25 @@
             <?php echo $this->getChildHtml('product_brand'); ?>
             <?php echo $this->getChildHtml('upsell_products') ?>
             <?php
-				$store = Mage::app()->getStore();
-				$code  = $store->getCode();
-				$block_id = Mage::getStoreConfig('legenda_setting/product_view/pro_side_block', $code);
-				if ($block_id) {
-					$product_right_block = Mage::getModel('cms/block')->load($block_id);
-					if($product_right_block->getIsActive()){
-						echo '<div class="product-right-custom-block">'.$this->getLayout()->createBlock('cms/block')->setBlockId($block_id)->toHtml().'</div>';
-					}
-				}
+                $store = Mage::app()->getStore();
+                $code  = $store->getCode();
+                
+                // Display CMS block from specific product attribute
+                if ($productSideBlock = $_product->getSideBlock()) {
+                    $product_right_block = Mage::getModel('cms/block')->load($productSideBlock);
+                    if ($product_right_block->getIsActive()) {
+                        echo '<div class="product-right-custom-block">'.$this->getLayout()->createBlock('cms/block')->setBlockId($productSideBlock)->toHtml().'</div>';
+                    }
+                // Otherwise, will try to display CMS block from specific config data
+                } else {
+                    $block_id = Mage::getStoreConfig('legenda_setting/product_view/pro_side_block', $code);
+                    if ($block_id) {
+                        $product_right_block = Mage::getModel('cms/block')->load($block_id);
+                        if ($product_right_block->getIsActive()) {
+                            echo '<div class="product-right-custom-block">'.$this->getLayout()->createBlock('cms/block')->setBlockId($block_id)->toHtml().'</div>';
+                        }
+                    }
+                }
             ?>
         </div>
     </form>
