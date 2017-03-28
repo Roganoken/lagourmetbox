@@ -31,9 +31,15 @@
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
     <div class="row opc-custom-message">
         <!-- TEMP MSG PANIER ET CHECKOUT -->
-        <div class="col-md-12">
-            <p class="prioritymsg"><?php echo $this->__('Prioritymsg') ?></p>	
-        </div>
+        <ul class="messages">
+            <li class="notice-msg">
+                <ul>
+                    <li>
+                        <span><?php echo $this->__('Prioritymsg'); ?></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 <ol class="opc" id="checkoutSteps">
 <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>

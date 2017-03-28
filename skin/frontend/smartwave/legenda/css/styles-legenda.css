@@ -1321,7 +1321,9 @@ p.required {
   padding: 6px !important; }
 
 .messages li li {
-  line-height: 24px; }
+    line-height: 24px;
+    text-transform: none;
+}
 
 .error-msg,
 .success-msg,
@@ -7449,6 +7451,10 @@ ul.list-arrow li:hover {
     width: 20px;
 }
 
+.opc-custom-message .messages {
+    width: 98%;
+}
+
 @media screen and (min-width: 1200px){
 
 /* ======================= Improved One Page Checkout with tabs  ======================== */
@@ -7478,7 +7484,7 @@ ul.list-arrow li:hover {
 .opc .step-title h2 { font-size:12px; color:#bbb; clear:both; }
 .opc .allow .step-title { cursor:pointer; background:#ffffff; }
 .opc .allow .step-title .number { background:#000; color:#fff; }
-.opc .active .step-title { color:#ef0606; cursor:default; border:1px solid #BBAFA0; border-bottom:1px solid #FBFAF6; z-index:2; background:#FBFAF6 url(../images/bkg_checkout.gif) 0 0 repeat-x; }
+.opc .active .step-title {cursor:default; border:1px solid #BBAFA0; border-bottom:1px solid #FBFAF6; z-index:2; background:#ffffff; }
 .opc .active .step-title .number { background:#D27C4A; border-color:#fff; color:#fff; }
 .opc .active .step-title h2 { color:#D27C4A; }
 .opc .step-title h2,.opc .allow .step-title h2,.opc .active .step-title h2 { width:100%; text-align:center; }
@@ -7496,6 +7502,8 @@ ul.list-arrow li:hover {
 .opc .form-list li.control label { float:left; }
 .opc form .form-list li.wide { margin-bottom:8px; margin-left: 8px; width: 100%;}
 .opc form .address-select { margin:8px 0 40px; }
+
+.opc .allow .step-title h2 {color:#594C3C;}
 
 .opc:first-of-type .step{-webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
 .opc:first-of-type .step[style*='display:none;'],
@@ -7532,6 +7540,8 @@ ul.list-arrow li:hover {
 #opc-review .buttons-set .please-wait { height:40px; line-height:40px; }
 #opc-shipping_method .buttons-set { border-top:1px solid #ebebeb; }
 
+#opc-login .step-title {margin-left: 0px;}
+.section.active + li .step-title {margin-left: 0px;}
 .opc .title span {
     padding: 0px;
     background: none;
