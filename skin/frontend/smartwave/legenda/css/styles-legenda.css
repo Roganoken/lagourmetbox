@@ -7448,3 +7448,98 @@ ul.list-arrow li:hover {
 .sp-methods .method-radio {
     width: 20px;
 }
+
+@media screen and (min-width: 1200px){
+
+/* ======================= Improved One Page Checkout with tabs  ======================== */
+.block-progress .block-title { background:none; margin:0 0 34px; padding:0; }
+.checkout-onepage-index .col-main { padding:0; border:0; }
+.checkout-onepage-index .page-title { padding-right:40px; width:auto; }
+.checkout-onepage-index .page-title h1 { background:none; padding:0; }
+
+.opc { position:relative; overflow:hidden; height:970px; padding-top:20px; text-align:center; }
+.opc .buttons-set { margin:15px 0 0; opacity:1!important; }
+.opc .buttons-set p.required { margin:0; padding:0 0 10px; }
+.opc .buttons-set .back-link { display:none; }
+.opc .buttons-set .please-wait { position:absolute; z-index:99; top:30%; left:50%; margin:-80px 0 0 -146px; border:5px solid #f3b66f; font-size:12px; background:#fff; padding:30px; white-space:nowrap; border:1px solid #c0c0c0; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -moz-box-shadow:1px 1px 2px rgba(0,0,0,0.2); -webkit-box-shadow:0 0 50px rgba(0,0,0,0.2); box-shadow:0 0 50px rgba(0,0,0,0.2); }
+.opc .buttons-set a { color:#214D90; }
+.opc .ul { list-style:disc outside; padding-left:18px; }
+.opc li.section { display:inline; }
+.opc .step-title,.opc .allow .step-title {  height:69px }
+.opc .step { padding:30px 20px; position:absolute; border:0; top:110px; left:0; z-index:1; background:#FBFAF6; width:100%; height:900px; border-bottom:1px dotted #ccc; border:none;text-align:left; border:1px solid #ebebeb; }
+.opc .step-title .number,.opc .allow .step-title .number,.opc .active .step-title .number { float:none; display:block; margin:0 auto; margin-bottom:10px; }
+.opc .step-title { position:relative; float:left; text-align:center; padding:9px 11px 0; margin-left:-1px; background:none; 
+    cursor: default;
+    border: 1px solid #BBAFA0;
+    z-index: 2;
+    border: 1px solid #ebebeb;}
+.opc .step-title a { display:none; }
+.opc .step-title .number { background:#ccc; color:#fff; width:30px; height:30px; line-height:30px; -moz-border-radius:20px; -webkit-border-radius:20px; border-radius:20px; margin-bottom:10px; padding:0; border:0; }
+.opc .step-title h2 { font-size:12px; color:#bbb; clear:both; }
+.opc .allow .step-title { cursor:pointer; background:#ffffff; }
+.opc .allow .step-title .number { background:#000; color:#fff; }
+.opc .active .step-title { color:#ef0606; cursor:default; border:1px solid #BBAFA0; border-bottom:1px solid #FBFAF6; z-index:2; background:#FBFAF6 url(../images/bkg_checkout.gif) 0 0 repeat-x; }
+.opc .active .step-title .number { background:#D27C4A; border-color:#fff; color:#fff; }
+.opc .active .step-title h2 { color:#D27C4A; }
+.opc .step-title h2,.opc .allow .step-title h2,.opc .active .step-title h2 { width:100%; text-align:center; }
+.opc .step-title { width:16%; }
+.opc .form-list .field,.opc .form-list .wide { }
+.opc .form-list li fieldset { margin-bottom:40px; }
+.opc .form-list label { float:left; text-align:right; padding:4px 0 0 9px; }
+.opc .form-list label.required em { float:none; position:relative; right:4px; }
+.opc .form-list li.fields { margin:0; }
+.opc .form-list div.fields { width:100%; overflow:hidden; margin:0 0 8px; }
+.opc .form-list .wide,.opc .form-list li.fields .field { width: 50%; margin:0 0 8px; }
+.opc .form-list li.wide .input-box,.opc .form-list .input-box { clear:none; float:right; }
+.opc .form-list li.wide select { width:390px; }
+.opc .form-list .control input { margin:8px 0 0 25px; }
+.opc .form-list li.control label { float:left; }
+.opc form .form-list li.wide { margin-bottom:8px; margin-left: 8px; width: 100%;}
+.opc form .address-select { margin:8px 0 40px; }
+
+.opc:first-of-type .step{-webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
+.opc:first-of-type .step[style*='display:none;'],
+.opc:first-of-type .step[style*='display: none;']{display:block !important;}
+.opc:first-of-type .section .step{left: 100%;}
+.opc:first-of-type .allow .step{left: -100%;}
+.opc:first-of-type .active .step{left:0;}
+.opc:first-of-type li:last-child .step-title a{width:50%}
+.opc:first-of-type li:first-child .step-title a{width:50%;left:50%}
+
+#opc-login p.required { display:none; }
+#opc-login h3 { margin-bottom:18px; }
+#opc-login .col-2 { float:left; }
+#opc-login .col-2 form fieldset h4 { display:none; }
+#opc-login .col-2 { display:block; width: 50%; }
+#opc-login .col-2 fieldset { width:300px; }
+#opc-login .col-2 .input-box { width:188px; margin:0; float:left; }
+#opc-login .col-2 .input-text { width:182px; }
+#opc-login .col-2 .form-list label { text-align:left; }
+#opc-login .col-2 .form-list label { width:150px; }
+#opc-login .form-list li.control label { float:none; }
+#opc-login .form-list li.control input { margin:0 8px 0 0; }
+#opc-login .col-1 { float:right; }
+#opc-login .col-1 { width: 50%; }
+#opc-login .col-1 h4,#opc-login .col-1 .ul { display:none; }
+#opc-login .col-1 .form-list label { text-align:left; }
+#checkout-step-review.step { width:645px; }
+
+#opc-review .step { padding:30px 20px; border-top:1px solid #ebebeb; width: 100%;}
+#opc-review .product-name { font-weight:bold; color:#0a263c; }
+#opc-review .item-options { margin:5px 0 0; }
+#opc-review .buttons-set { padding:20px 0; border:0; }
+#opc-review .buttons-set p { margin:0; line-height:40px; }
+#opc-review .buttons-set .please-wait { height:40px; line-height:40px; }
+#opc-shipping_method .buttons-set { border-top:1px solid #ebebeb; }
+
+.opc .title span {
+    padding: 0px;
+    background: none;
+}
+
+.opc .form-list textarea { height: 60px;}
+/* ================================= Solution by www.h-o.nl =============================== */
+
+}
+
+
