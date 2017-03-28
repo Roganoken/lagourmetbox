@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <cms translate="label">
+            <groups>
+                <gourmetbox translate="label">
+                    <label>Gourmet Box</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <message_checkout translate="label">
+                            <label>Message du tunnel</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>identifiant du block CMS</comment>
+                        </message_checkout>
+                    </fields>
+                </gourmetbox>
+            </groups>
+        </cms>
+    </sections>
+</config>
