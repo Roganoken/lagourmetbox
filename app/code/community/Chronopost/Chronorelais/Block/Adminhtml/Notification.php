@@ -32,50 +32,7 @@ class Chronopost_Chronorelais_Block_Adminhtml_Notification extends Mage_Core_Blo
 
     public function getNotifications()
     {
-        $notifications = array();
-        /* test if WS is ok */
-        $_helper = Mage::helper('chronorelais');
-        $account_number = $_helper->getConfigurationAccountNumber();
-        $password = $_helper->getConfigurationAccountPass();
-        $origin_postcode = $_helper->getConfigurationShipperInfo('zipcode');
-
-        $WSParams = array(
-            'accountNumber' => $account_number,
-            'password' => $password,
-            'depCountryCode' => $_helper->getConfigurationShipperInfo('country'),
-            'depZipCode' => $origin_postcode,
-            'arrCountryCode' => $_helper->getConfigurationShipperInfo('country'),
-            'arrZipCode' => $origin_postcode,
-            'arrCity' => $_helper->getConfigurationShipperInfo('city'),
-            'type' => 'M',
-            'weight' => 1
-        );
-
-        $helperWS = Mage::helper('chronorelais/webservice');
-        $webservbt = $helperWS->checkLogin($WSParams);
-
-        if(!$webservbt) {
-            $notifications[] = 'quickcost_not_available';
-        } else {
-            $webservbt = (array)$webservbt;
-            if(isset($webservbt['errorCode']) && $webservbt['errorCode'] != 0) {
-                $notifications[] = 'quickcost_not_available';
-            }
-        }
-
-        /* test if new version is available */
-        $currentVersion = (string)Mage::getConfig()->getModuleConfig("Chronopost_Chronorelais")->version;
-
-        $xml = simplexml_load_file(self::MODULE_RELEASES_XML_URL);
-        $nbRelease = count($xml->children());
-        $releases = $xml->children();
-        $lastRelease = $releases[0];
-        if(version_compare($lastRelease->v, $currentVersion, '>')) {
-            $notifications[] = 'new_version';
-        }
-
-        return $notifications;
-
+        return $this;
     }
 
 }
