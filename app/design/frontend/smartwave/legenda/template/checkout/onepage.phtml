@@ -31,9 +31,20 @@
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
     <div class="row opc-custom-message">
         <!-- TEMP MSG PANIER ET CHECKOUT -->
-        <div class="col-md-12">
-            <p class="prioritymsg"><?php echo $this->__('Prioritymsg') ?></p>	
-        </div>
+        <?php 
+            $messageConfig = Mage::getStoreConfig('cms/gourmetbox/message_checkout');
+            if ($messageConfig):
+        ?>
+            <ul class="messages">
+                <li class="notice-msg">
+                    <ul>
+                        <li>
+                            <span><?php echo $messageConfig; ?></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        <?php endif; ?>
     </div>
 <ol class="opc" id="checkoutSteps">
 <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>

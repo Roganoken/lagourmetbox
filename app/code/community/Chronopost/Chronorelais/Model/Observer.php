@@ -237,14 +237,15 @@ class Chronopost_Chronorelais_Model_Observer
         if (isset($relais->localite)) {
             $methodTitle = ' - ' . $relais->nomEnseigne . ' - ' . trim($relais->adresse1 . " " . $relais->adresse2 . " " . $relais->adresse3) . ' - ' . $relais->codePostal . ' - ' . $relais->localite;
         }
-        if ($method) {
-            foreach ($address->getAllShippingRates() as $rate) {
-                if ($rate->getCode() == $method) {
-                    $address->setShippingDescription($rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle() . $methodTitle);
-                    break;
-                }
-            }
-        }
+        
+//        if ($method) {
+//            foreach ($address->getAllShippingRates() as $rate) {
+//                if ($rate->getCode() == $method) {
+//                    $address->setShippingDescription($rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle() . $methodTitle);
+//                    break;
+//                }
+//            }
+//        }
         //ENDWEC chronorelais
     }
 
