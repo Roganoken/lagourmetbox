@@ -19,7 +19,7 @@
 <config>
     <modules>
         <Mfb_Myflyingbox>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
             <depends>
                 <Mage_Core />

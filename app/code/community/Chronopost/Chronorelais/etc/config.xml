@@ -21,11 +21,11 @@
             <chronorelais>
                 <class>Chronopost_Chronorelais_Block</class>
             </chronorelais>
-            <adminhtml>
+<!--            <adminhtml>
                 <rewrite>
                     <sales_order_shipment_view>Chronopost_Chronorelais_Block_Sales_Order_Shipment_View</sales_order_shipment_view>
                 </rewrite>
-            </adminhtml>
+            </adminhtml>-->
         </blocks>
         <helpers>
             <chronorelais>
