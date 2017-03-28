@@ -7504,6 +7504,7 @@ ul.list-arrow li:hover {
 .opc form .address-select { margin:8px 0 40px; }
 
 .opc .allow .step-title h2 {color:#594C3C;}
+.opc .allow.active .step-title h2 {color:#D27C4A;}
 
 .opc:first-of-type .step{-webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;-o-transition: all 0.5s ease-in-out;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;}
 .opc:first-of-type .step[style*='display:none;'],
