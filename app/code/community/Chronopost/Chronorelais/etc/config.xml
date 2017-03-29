@@ -321,6 +321,17 @@
             </modules>
         </translate>
 
+        <events>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <add_chronopost_print_button>
+                        <type>model</type>
+                        <class>Chronopost_Chronorelais_Model_Observer</class>
+                        <method>addPrintButton</method>
+                    </add_chronopost_print_button>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
+        </events>
     </adminhtml>
 
     <admin>

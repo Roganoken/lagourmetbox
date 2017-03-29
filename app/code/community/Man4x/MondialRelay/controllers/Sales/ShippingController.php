@@ -258,4 +258,58 @@ class Man4x_MondialRelay_Sales_ShippingController extends Mage_Adminhtml_Sales_O
         $_helper->output();
     }
 
+    /**
+     * Mondial Relay mass label printing
+     * from Admin > Sales > Mondial Relay > Label Print, Action = label print
+     */
+    public function labelPrintingAction()
+    {
+        $_shipmentIds = (array) $this->getRequest()->getParam('shipment_ids');
+        
+        // shipment ids -> tracking ids
+        $_trackings = array();
+        foreach ($_shipmentIds as $_shipmentId)
+        {
+            if ($_shipment = Mage::getModel('sales/order_shipment')->load($_shipmentId))
+            {
+                $_tracks = $_shipment->getTracksCollection();
+                foreach ($_tracks as $_track)
+                {
+                    if (($_track->getParentId() == $_shipmentId)
+                            && (FALSE !== strpos($_track->getCarrierCode(), 'mondialrelay')))
+                    {
+                        // getTrackNumber() for Magento 1.7+ and $_track->getNumber() for older versions
+                        $_trackings[] = $_track->getTrackNumber() ? $_track->getTrackNumber() : $_track->getNumber();
+                    }
+                }
+            }
+        }
+        $_trackingList = implode(';', $_trackings);
+        try
+        {
+            // We get the pdf file from Mondial Relay web service
+            $_urlLabel = Man4x_MondialRelay_Model_Carrier_Abstract::getWsLabelUrl($_trackingList);
+            if (strlen($_urlLabel) < 4)
+            {
+                // Error 
+                $this->_getSession()->addError(
+                        Mage::helper('mondialrelay')->__(
+                                'An error has occurred during label recovery (%s)', Mage::helper('mondialrelay')->convertStatToTxt($_urlLabel))
+                );
+            }
+            else
+            {
+                $this->_processDownload($_urlLabel, 'url');
+                exit(0);
+            }
+        }
+        catch (Mage_Core_Exception $e)
+        {
+            // Error
+            $this->_getSession()->addError(
+                    Mage::helper('mondialrelay')->__('An error has occurred during labels recovery. Please contact Mondial Relay or try again later.'));
+        }
+        return $this->_redirectReferer();
+    }
+
 }
