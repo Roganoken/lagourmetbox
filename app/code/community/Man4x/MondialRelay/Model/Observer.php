@@ -132,5 +132,43 @@ class Man4x_MondialRelay_Model_Observer
             }
         }
     }
+    
+    public function addPrintButton($observer)
+    {
+        $block = $observer->getEvent()->getData('block');
+        
+        if ($block instanceof Mage_Adminhtml_Block_Sales_Order_Shipment_View ) {
+        
+            $order = Mage::getModel('sales/order')->load($block->getShipment()->getOrderId());
+            $shippingMethod = $order->getShippingMethod();
+            
+            $shippingMethods = explode("_", $shippingMethod);
+            
+            if ($shippingMethods[0] == 'mondialrelaypickup') {
+            
+                $block->addButton('print_chronopost', 
+                    array(
+                        'label' => Mage::helper('sales')->__('Print Mondial Relay'), 
+                        'onclick' => 'setLocation(\''.$this->getMondialRelayPrintUrl($observer).'\')',
+                        'class' => 'go'
+                    )
+                );
+            }
+        }
+        
+        return $this;
+    }
+
+    public function getMondialRelayPrintUrl($observer)
+    {
+        $block = $observer->getEvent()->getData('block');
+        
+        return Mage::helper("adminhtml")->getUrl(
+                    'mondialrelay/sales_shipping/labelPrinting', 
+                    array(
+                        'shipment_ids' => $block->getShipment()->getEntityId()
+                    )
+                );
+    }
 
 }

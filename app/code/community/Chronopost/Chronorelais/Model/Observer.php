@@ -267,6 +267,42 @@ class Chronopost_Chronorelais_Model_Observer
 
         unset($_SESSION['chronopostsrdv_creneaux_info']);
     }
+    
+    public function addPrintButton($observer)
+    {
+        $block = $observer->getEvent()->getData('block');
+        
+        if ($block instanceof Mage_Adminhtml_Block_Sales_Order_Shipment_View ) {
+        
+            $order = Mage::getModel('sales/order')->load($block->getShipment()->getOrderId());
+            $shippingMethod = $order->getShippingMethod();
+            
+            $shippingMethods = explode("_", $shippingMethod);
+            
+            if ($shippingMethods[0] == 'chronopost') {
+            
+                $block->addButton('print_chronopost', 
+                    array(
+                        'label' => Mage::helper('sales')->__('Print Chronopost'), 
+                        'onclick' => 'setLocation(\''.$this->getChronoPrintUrl($observer).'\')',
+                        'class' => 'go'
+                    )
+                );
+            }
+        }
+        
+        return $this;
+    }
 
-
+    public function getChronoPrintUrl($observer)
+    {
+        $block = $observer->getEvent()->getData('block');
+        
+        return Mage::helper("adminhtml")->getUrl(
+                    '*/chronorelais_sales_impression/print', 
+                    array(
+                        'shipment_increment_id' => $block->getShipment()->getIncrementId()
+                    )
+                );
+    }
 }

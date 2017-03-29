@@ -101,6 +101,15 @@
                     </add_mondialrelay_shipping_code>
                 </observers>
             </sales_order_shipment_save_before>
+            <core_block_abstract_prepare_layout_before>
+                <observers>
+                    <add_mondialrelay_print_button>
+                        <type>model</type>
+                        <class>Man4x_MondialRelay_Model_Observer</class>
+                        <method>addPrintButton</method>
+                    </add_mondialrelay_print_button>
+                </observers>
+            </core_block_abstract_prepare_layout_before>
         </events>
         <translate>
             <modules>
