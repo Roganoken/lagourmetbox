@@ -405,6 +405,7 @@ border-bottom:3px solid #E4DCD2;
 
 #opc-shipping_method .sp-methods dt {
     font-size: 14px;
+    font-weight: bold;
 }
 
 .onepagecheckout_datafields .sp-methods label,
