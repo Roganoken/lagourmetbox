@@ -7569,4 +7569,6 @@ ul.list-arrow li:hover {
 
 }
 
-
+#pickup-selection-link {
+    text-decoration: underline;
+}

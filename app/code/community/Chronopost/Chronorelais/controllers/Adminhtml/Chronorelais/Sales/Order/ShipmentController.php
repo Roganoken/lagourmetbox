@@ -350,18 +350,21 @@ class Chronopost_Chronorelais_Adminhtml_Chronorelais_Sales_Order_ShipmentControl
                 }
                 if($weightShipping > $weight_limit) {
 
+                    // OVERRIDE : use Native functionality !
+                    $savedQtys = $this->_getItemQtys();
+                    $shipment = Mage::getModel('sales/service_order', $order)->prepareShipment($savedQtys);
+                    
                     /* Create one shipment by product ordered */
-                    foreach($savedQtys as $iditem => $qty) {
-                        $item = $order->getItemById($iditem);
-                        $weightShipping += $item->getWeight()*$qty;
-                        for($i = 1; $i <= $qty; $i++) {
-                            $shipment[] = Mage::getModel('sales/service_order', $order)->prepareShipment(array($item->getId() => '1'));
-
-                        }
-                    }
+//                    foreach($savedQtys as $iditem => $qty) {
+//                        $item = $order->getItemById($iditem);
+//                        $weightShipping += $item->getWeight()*$qty;
+//                        for($i = 1; $i <= $qty; $i++) {
+//                            $shipment[] = Mage::getModel('sales/service_order', $order)->prepareShipment(array($item->getId() => '1'));
+//
+//                        }
+//                    }
                 }
             }
-
 
             if(!$shipment)
             {
