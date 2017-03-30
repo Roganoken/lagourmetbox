@@ -35,6 +35,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -214,6 +222,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -385,6 +401,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -582,6 +606,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -762,6 +794,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -942,6 +982,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -1121,6 +1169,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -1450,6 +1506,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
@@ -1639,6 +1703,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </title>
+                        <desc translate="label">
+                            <label>Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </desc>
                         <config translate="label">
                             <label>Configuration</label>
                             <frontend_model>chronorelais/adminhtml_system_config_form_field_config</frontend_model>
