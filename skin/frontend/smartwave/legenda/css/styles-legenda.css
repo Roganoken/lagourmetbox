@@ -7455,7 +7455,7 @@ ul.list-arrow li:hover {
     width: 98%;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1024px){
 
 /* ======================= Improved One Page Checkout with tabs  ======================== */
 .block-progress .block-title { background:none; margin:0 0 34px; padding:0; }
@@ -7546,6 +7546,22 @@ ul.list-arrow li:hover {
 .opc .title span {
     padding: 0px;
     background: none;
+}
+
+.checkout-onepage-index .col-right {
+    display: none;
+}
+
+.checkout-onepage-index .col-md-9 {
+    width: 100%;
+}
+
+.row.opc-custom-message {
+    margin: 0ox;
+}
+
+.checkout-onepage-index .opc-custom-message .messages {
+    width: 100%;
 }
 
 .opc .form-list textarea { height: 60px;}
