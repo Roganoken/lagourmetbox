@@ -41,7 +41,8 @@ class HimediaPayments_Hipay_Block_Form extends Mage_Payment_Block_Form
 {
 	protected function _construct()
 	{
-		$this->setTemplate('himediapayments/hipay/form.phtml');
+		$this->setTemplate('himediapayments/hipay/form.phtml')
+                    ->setMethodLabelAfterHtml(Mage::helper('checkout')->__('(online secured payment system for credit cards)'));
 		parent::_construct();
 	}
 }
