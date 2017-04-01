@@ -5129,9 +5129,15 @@ tr.summary-details-excluded {
   display: inline-block;
   background: url(../images/arrow_down.png) no-repeat right center;
   padding-right: 20px; }
-.cart .shipping .shipping-form {
-  display: none; }
-
+.cart-shipping-extra {
+    width: 67%;
+}
+.cart-coupon-extra {
+    width: 33%;
+}
+.cart-shipping-extra .sp-methods dt {
+    font-weight: bold;
+}
 .cart .discount {
   float: right;
   width: 206px; }
@@ -5151,10 +5157,6 @@ tr.summary-details-excluded {
 .cart .shipping .buttons-set button.button {
   float: right;
   margin-left: 0; }
-
-.cart .shipping .sp-methods {
-  margin: 10px 0 0;
-  padding: 5px 0 0; }
 
 /* Shopping Cart Totals */
 .cart .totals {

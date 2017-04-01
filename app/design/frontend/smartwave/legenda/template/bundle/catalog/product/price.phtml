@@ -77,7 +77,6 @@ if ($_product->getPriceType() == 1) {
 <div class="price-box">
         <?php if ($_product->getPriceView()): ?>
             <p class="minimal-price">
-                <span class="price-label"><?php echo $this->__('As low as') ?>:</span>
                 <?php if ($this->displayBothPrices()): ?>
                     <span class="price-excluding-tax">
                         <span class="label"><?php echo $_taxHelper->__('Excl. Tax:') ?></span>

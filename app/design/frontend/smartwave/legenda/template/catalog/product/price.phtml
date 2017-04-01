@@ -405,8 +405,21 @@
                         $_showPrice = $_exclTax;
                     }
                     ?>
+                <?php
+                    //Calculate price with option price
+                    $bundledProduct = new Mage_Catalog_Model_Product();		
+                    $bundledProduct->load($_id);
+
+                    $selectionCollection = $bundledProduct->getTypeInstance(true)->getAssociatedProducts($bundledProduct);
+
+                    $bundledOptionQuantity = 1;
+                    
+                    foreach($selectionCollection as $option) {
+                        $bundledOptionQuantity = $option->getQty();
+                    }
+                ?>
                 <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo $_coreHelper->currency($_showPrice, true, false) ?>
+                    <?php echo $_coreHelper->currency($_showPrice * $bundledOptionQuantity, true, false) ?>
                 </span>
                 <?php endif; ?>
             </p>

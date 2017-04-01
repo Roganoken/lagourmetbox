@@ -262,6 +262,7 @@ class Mage_Adminhtml_Sales_Order_ShipmentController extends Mage_Adminhtml_Contr
         try {
             $shipment = $this->_initShipment();
             if ($shipment) {
+                // OVERRIDE : handle trackng link
                 $tracking_order = '';
                 if ($shipment->getAllTracks()) {
                     foreach ($shipment->getAllTracks() as $carrier) {
@@ -764,3 +765,4 @@ class Mage_Adminhtml_Sales_Order_ShipmentController extends Mage_Adminhtml_Contr
            );
     }
 }
+
