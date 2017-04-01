@@ -133,7 +133,7 @@
                                 <?php  if ( !($_product->getData('has_options') || $_product->isGrouped()) ) :  ?>
                                     <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="setLocationAjax('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                                 <?php else: ?>
-                                    <button type="button" title="<?php echo $this->__('Select Option') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="showOptions('<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Select Option') ?></span></span></button>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="showOptions('<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                                     <a href='<?php echo $this->getUrl('ajaxcart/index/options',array('product_id'=>$_product->getId()));?>' class='fancybox' id='fancybox<?php echo $_product->getId()?>' style='display:none'>Options</a>
                                 <?php endif; ?>
 							<?php else: ?>
@@ -259,7 +259,7 @@
                                 <?php  if ( !($_product->getData('has_options') || $_product->isGrouped()) ) :  ?>
                                     <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="setLocationAjax('<?php echo $this->getAddToCartUrl($_product) ?>','<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                                 <?php else: ?>
-                                    <button type="button" title="<?php echo $this->__('Select Option') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="showOptions('<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Select Option') ?></span></span></button>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart btn-cart-<?php echo $_product->getId()?>" onclick="showOptions('<?php echo $_product->getId()?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                                     <a href='<?php echo $this->getUrl('ajaxcart/index/options',array('product_id'=>$_product->getId()));?>' class='fancybox' id='fancybox<?php echo $_product->getId()?>' style='display:none'>Options</a>
                                 <?php endif; ?>
 							<?php else: ?>

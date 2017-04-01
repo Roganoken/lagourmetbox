@@ -67,16 +67,19 @@
             <td><?php echo $this->escapeHtml($_item->getName()) ?></td>
             <?php if ($this->getCanShowProductPrice($_product)): ?>
             <td class="a-right">
-                <?php if ($this->getCanShowProductPrice($_item)): ?>
-                <?php echo $this->getPriceHtml($_item, true) ?>
-                <?php echo $this->getTierPriceHtml($_item) ?>
-                <?php endif; ?>
+                <div class="price-box">
+                    <span class="regular-price" id="product-price-8">
+                        <span class="price">
+                            <?php echo $this->helper('core')->currency($_finalPriceInclTax * $_item->getQty(), true, false); ?>
+                        </span>
+                    </span>
+                </div>
             </td>
             <?php endif; ?>
             <?php if ($_product->isSaleable()): ?>
             <td class="a-center">
             <?php if ($_item->isSaleable()) : ?>
-                <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" readonly="readonly" />
             <?php else: ?>
                 <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
             <?php endif; ?>

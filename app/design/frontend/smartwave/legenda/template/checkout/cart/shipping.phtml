@@ -26,7 +26,7 @@
 ?>
 <?php /** @var $this Mage_Checkout_Block_Cart_Shipping */ ?>
 <div class="shipping">
-    <!--<h2><a href="javascript:void(0)" class="shipping-calc-button"><?php echo $this->__('Calculate Shipping') ?></a></h2>-->
+    <h2><a href="javascript:void(0)" class="shipping-calc-button"><?php echo $this->__('Calculate Shipping') ?></a></h2>
     <div class="shipping-form">
        <form action="<?php echo $this->getUrl('checkout/cart/estimatePost') ?>" method="post" id="shipping-zip-form">
             <ul class="form-list">
@@ -35,21 +35,6 @@
                         <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getEstimateCountryId()) ?>
                     </div>
                 </li>
-            <?php //if($this->getStateActive()): ?>
-                <li>
-                    <div class="input-box">
-                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
-                            <option value=""><?php echo $this->__('State / Province') ?></option>
-                        </select>
-                       <script type="text/javascript">
-                       //<![CDATA[
-                           $('region_id').setAttribute('defaultValue',  "<?php echo $this->getEstimateRegionId() ?>");
-                       //]]>
-                       </script>
-                       <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getEstimateRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" placeholder="State / Province"/>
-                   </div>
-                </li>
-            <?php //endif; ?>
             <?php if($this->getCityActive()): ?>
                 <li>
                     <div class="input-box">
