@@ -583,6 +583,7 @@ class ChronorelaisShippingHelper {
                 $replacement = $this->_expression_cache[$original];
                 self::debug('      get cached expression <span class="osh-replacement">' . $original . '</span> = <span class="osh-formula">' . $replacement . '</span>', 10);
             } else {
+                
                 $reference_value = $this->_evalFormula($result[1] - ($groupedProductQty * 3));
                 
                 if (isset($isGroupedProduct)) {
@@ -598,7 +599,7 @@ class ChronorelaisShippingHelper {
                     }
                 }
                 
-                if (isset($reference_value)) {
+                if (isset($reference_value) && $reference_value > 1) {
                     $fees_table_string = $result[2];
 
                     if (!preg_match('#^' . self::$COUPLE_REGEX . '(?:, *' . self::$COUPLE_REGEX . ')*$#', $fees_table_string)) {
