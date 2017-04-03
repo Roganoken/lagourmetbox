@@ -69,7 +69,9 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     </td>
     <td class="table-edit a-center">
         <?php if ($isVisibleProduct): ?>
-        <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item parameters') ?>" class="edit-link"><span class="hidden-xs"><?php echo $this->__('Edit') ?></span></a>
+            <?php if ($_item->getProductType() != 'grouped'): ?>
+                <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item parameters') ?>" class="edit-link"><span class="hidden-xs"><?php echo $this->__('Edit') ?></span></a>
+            <?php endif ?>
         <?php endif ?>
     </td>
     <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>

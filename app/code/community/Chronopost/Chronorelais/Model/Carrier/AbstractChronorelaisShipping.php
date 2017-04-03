@@ -34,12 +34,14 @@ class OCS_Magento_Product implements OCS_Product {
 	private $cart_product;
 	private $loaded_product;
 	private $quantity;
+	private $id;
 
 	public function OCS_Magento_Product($cart_item, $parent_cart_item) {
 		$this->cart_item = $cart_item;
 		$this->cart_product = $cart_item->getProduct();
 		$this->parent_cart_item = $parent_cart_item;
 		$this->quantity = isset($parent_cart_item) ? $parent_cart_item->getQty() : $cart_item->getQty();
+		$this->id = $cart_item->getProduct()->getId();
 	}
 
 	public function getOption($option_name, $get_by_id=false) {
@@ -88,6 +90,10 @@ class OCS_Magento_Product implements OCS_Product {
 	public function getQuantity() {
 		return $this->quantity;
 	}
+
+	public function getId() {
+		return $this->id;
+        }
 
 	public function getName() {
 		return $this->cart_product->getName();
@@ -186,7 +192,7 @@ abstract class Chronopost_Chronorelais_Model_Carrier_AbstractChronorelaisShippin
 		}
 
 		$this->_process($process);
-
+                
 		return $process['result'];
 	}
 
@@ -244,131 +250,135 @@ abstract class Chronopost_Chronorelais_Model_Carrier_AbstractChronorelaisShippin
 
 	/***************************************************************************************************************************/
 
-	protected function _process(&$process) {
-		$store = Mage::app()->getStore($process['data']['store.id']);
-		$mage_config = Mage::getConfig();
-		$timestamp = time();
-		$customer_group_id = Mage::getSingleton('customer/session')->getCustomerGroupId();
-                $helper = Mage::helper('chronorelais');
-		// Pour les commandes depuis Adminhtml
-		if ($customer_group_id==0) {
-			$customer_group_id2 = Mage::getSingleton('adminhtml/session_quote')->getQuote()->getCustomerGroupId();
-			if (isset($customer_group_id2)) {
-				$customer_group_id = $customer_group_id2;
-			}
-		}
-
-		$customer_group_code = Mage::getSingleton('customer/group')->load($customer_group_id)->getData('customer_group_code');
-		$process['data'] = array_merge($process['data'],array(
-			'customer.group.id' => $customer_group_id,
-			'customer.group.code' => $customer_group_code,
-			'destination.country.name' => $this->__getCountryName($process['data']['destination.country.code']),
-			'origin.country.name' => $this->__getCountryName($process['data']['origin.country.code']),
-			'cart.weight.unit' => $helper->getConfigWeightUnit(),
-			'store.code' => $store->getCode(),
-			'store.name' => $store->getConfig('general/store_information/name'),
-			'store.address' => $store->getConfig('general/store_information/address'),
-			'store.phone' => $store->getConfig('general/store_information/phone'),
-			'date.timestamp' => $timestamp,
-			'date.year' => (int)date('Y',$timestamp),
-			'date.month' => (int)date('m',$timestamp),
-			'date.day' => (int)date('d',$timestamp),
-			'date.hour' => (int)date('H',$timestamp),
-			'date.minute' => (int)date('i',$timestamp),
-			'date.second' => (int)date('s',$timestamp),
-			'module.version' => (string)$mage_config->getNode('modules/Chronopost_Chronorelais/version'),
-		));
-
-        $weight_limit = $this->__getConfigData('weight_limit'); /* weight_limit in kg */
-        $productWeightOverLimit = false;
-
-		foreach ($process['cart.items'] as $item) {
-			if ($item->getProduct()->getTypeId()!='configurable') {
-				$parent_item_id = $item->getParentItemId();
-                $itemWeight = $item->getWeight();
-                if($helper->getConfigWeightUnit() == 'g')
-                {
-                    $itemWeight = $itemWeight / 1000; // conversion g => kg
+	protected function _process(&$process)
+        {
+            $store = Mage::app()->getStore($process['data']['store.id']);
+            $mage_config = Mage::getConfig();
+            $timestamp = time();
+            $customer_group_id = Mage::getSingleton('customer/session')->getCustomerGroupId();
+            $helper = Mage::helper('chronorelais');
+            
+            // Pour les commandes depuis Adminhtml
+            if ($customer_group_id==0) {
+                $customer_group_id2 = Mage::getSingleton('adminhtml/session_quote')->getQuote()->getCustomerGroupId();
+                if (isset($customer_group_id2)) {
+                    $customer_group_id = $customer_group_id2;
                 }
-                if($itemWeight > $weight_limit) {
-                    $productWeightOverLimit = true;
+            }
+
+            $customer_group_code = Mage::getSingleton('customer/group')->load($customer_group_id)->getData('customer_group_code');
+            $process['data'] = array_merge($process['data'],array(
+                'customer.group.id' => $customer_group_id,
+                'customer.group.code' => $customer_group_code,
+                'destination.country.name' => $this->__getCountryName($process['data']['destination.country.code']),
+                'origin.country.name' => $this->__getCountryName($process['data']['origin.country.code']),
+                'cart.weight.unit' => $helper->getConfigWeightUnit(),
+                'store.code' => $store->getCode(),
+                'store.name' => $store->getConfig('general/store_information/name'),
+                'store.address' => $store->getConfig('general/store_information/address'),
+                'store.phone' => $store->getConfig('general/store_information/phone'),
+                'date.timestamp' => $timestamp,
+                'date.year' => (int)date('Y',$timestamp),
+                'date.month' => (int)date('m',$timestamp),
+                'date.day' => (int)date('d',$timestamp),
+                'date.hour' => (int)date('H',$timestamp),
+                'date.minute' => (int)date('i',$timestamp),
+                'date.second' => (int)date('s',$timestamp),
+                'module.version' => (string)$mage_config->getNode('modules/Chronopost_Chronorelais/version'),
+            ));
+
+            $weight_limit = $this->__getConfigData('weight_limit'); /* weight_limit in kg */
+            $productWeightOverLimit = false;
+
+            foreach ($process['cart.items'] as $item) {
+                if ($item->getProduct()->getTypeId()!='configurable') {
+                    $parent_item_id = $item->getParentItemId();
+                    $itemWeight = $item->getWeight();
+                    if($helper->getConfigWeightUnit() == 'g') {
+                        $itemWeight = $itemWeight / 1000; // conversion g => kg
+                    }
+                    if($itemWeight > $weight_limit) {
+                        $productWeightOverLimit = true;
+                    }
+                    $process['products'][] = new OCS_Magento_Product($item, isset($process['cart.items'][$parent_item_id]) ? $process['cart.items'][$parent_item_id] : null);
                 }
-				$process['products'][] = new OCS_Magento_Product($item, isset($process['cart.items'][$parent_item_id]) ? $process['cart.items'][$parent_item_id] : null);
-			}
-		}
+            }
+            
+            if (!$process['data']['free_shipping']) {
+                foreach ($process['cart.items'] as $item) {
+                    if ($item->getProduct() instanceof Mage_Catalog_Model_Product) {
+                        if ($item->getFreeShipping()) {
+                            $process['data']['free_shipping'] = true;
+                        } else {
+                            $process['data']['free_shipping'] = false;
+                            break;
+                        }
+                    }
+                }
+            }
 
-		if (!$process['data']['free_shipping']) {
-			foreach ($process['cart.items'] as $item) {
-				if ($item->getProduct() instanceof Mage_Catalog_Model_Product) {
-					if ($item->getFreeShipping()) {
-						$process['data']['free_shipping'] = true;
-					} else {
-						$process['data']['free_shipping'] = false;
-						break;
-					}
-				}
-			}
-		}
+            $process['data']['cart.price_including_tax'] = $this->__getCartTaxAmount($process)+$process['data']['cart.price_excluding_tax'];
+            $process['stop_to_first_match'] = $this->__getConfigData('stop_to_first_match');
+            $process['config'] = $this->_getConfig();
+            $compression = $this->__getConfigData('auto_compression');
+            
+            if ($compression=='compress') {
+                Mage::getConfig()->saveConfig('carriers/'.$this->_code.'/config',$this->_helper->formatConfig(true));
+            } else if ($compression=='uncompress') {
+                Mage::getConfig()->saveConfig('carriers/'.$this->_code.'/config',$this->_helper->formatConfig(false));
+            }
 
-		$process['data']['cart.price_including_tax'] = $this->__getCartTaxAmount($process)+$process['data']['cart.price_excluding_tax'];
-		$process['stop_to_first_match'] = $this->__getConfigData('stop_to_first_match');
-		$process['config'] = $this->_getConfig();
-		$compression = $this->__getConfigData('auto_compression');
-		if ($compression=='compress') {
-			Mage::getConfig()->saveConfig('carriers/'.$this->_code.'/config',$this->_helper->formatConfig(true));
-		} else if ($compression=='uncompress') {
-			Mage::getConfig()->saveConfig('carriers/'.$this->_code.'/config',$this->_helper->formatConfig(false));
-		}
+            $this->_helper->debug = (int)(isset($_GET['debug']) ? $_GET['debug'] : $this->__getConfigData('debug'));
+            $http_request = Mage::app()->getFrontController()->getRequest();
+            $this->_helper->debug = $this->_helper->debug && $http_request->getRouteName()=='checkout' && $http_request->getControllerName()=='cart';
+            
+            if ($this->_helper->debug) {
+                    $this->_helper->setDebugHeader($process);
+            }
 
-		$this->_helper->debug = (int)(isset($_GET['debug']) ? $_GET['debug'] : $this->__getConfigData('debug'));
-		$http_request = Mage::app()->getFrontController()->getRequest();
-		$this->_helper->debug = $this->_helper->debug && $http_request->getRouteName()=='checkout' && $http_request->getControllerName()=='cart';
-		if ($this->_helper->debug) {
-			$this->_helper->setDebugHeader($process);
-		}
+            $value_found = false;
+            $process_continue = true;
 
-		$value_found = false;
-		$process_continue = true;
+            //Set error messages if not any matching
+            $freeShippingEnable = $this->__getConfigData('free_shipping_enable');
+            $freeShippingSubtotal = $this->__getConfigData('free_shipping_subtotal');
+            $applicationFee 	= $this->__getConfigData('application_fee');
+            $handlingFee 		= $this->__getConfigData('handling_fee');
 
-		//Set error messages if not any matching
-		$freeShippingEnable = $this->__getConfigData('free_shipping_enable');
-		$freeShippingSubtotal = $this->__getConfigData('free_shipping_subtotal');
-		$applicationFee 	= $this->__getConfigData('application_fee');
-		$handlingFee 		= $this->__getConfigData('handling_fee');
+            /* On autorise chronopost > 30 Kg si tous les produits sont <= 30 Kg */
+            if($productWeightOverLimit) {
+                $value_found = false;
+                $process_continue = false;
+            }
 
-        /* On autorise chronopost > 30 Kg si tous les produits sont <= 30 Kg */
-        if($productWeightOverLimit) {
-			$value_found = false;
-			$process_continue = false;
-		}
+            $process_continue = $this->validateMethod();
 
-		$process_continue = $this->validateMethod();
+            if($process_continue) {
+                foreach ($process['config'] as $row) {
+                    $result = $this->_helper->processRow($process,$row);
+                    
+                    $this->_addMessages($this->_helper->getMessages());
+                    if ($result && $result->success) {
+                        $value_found = true;
+                        $fees = $result->result;
+                        if($applicationFee) {
+                                $fees += $applicationFee;
+                        }
+                        if($handlingFee) {
+                                $fees += $handlingFee;
+                        }
+                        if($freeShippingEnable && ($freeShippingSubtotal<=$process['data']['cart.price_excluding_tax'])) {
+                                $fees = 0;
+                        }
+                        $this->__appendMethod($process,$row,$fees);
+                        if ($process['stop_to_first_match']) {
+                                break;
+                        }
+                    }
+                }
+            }
 
-		if($process_continue) {
-			foreach ($process['config'] as $row) {
-				$result = $this->_helper->processRow($process,$row);
-				$this->_addMessages($this->_helper->getMessages());
-				if ($result && $result->success) {
-					$value_found = true;
-					$fees = $result->result;
-					if($applicationFee) {
-						$fees += $applicationFee;
-					}
-					if($handlingFee) {
-						$fees += $handlingFee;
-					}
-					if($freeShippingEnable && ($freeShippingSubtotal<=$process['data']['cart.price_excluding_tax'])) {
-						$fees = 0;
-					}
-					$this->__appendMethod($process,$row,$fees);
-					if ($process['stop_to_first_match']) {
-						break;
-					}
-				}
-			}
-		}
-
-		$this->_helper->printDebug();
+            $this->_helper->printDebug();
 	}
 
 	/* Additional conditions to show shipping method, each shipping method model might have their own validateMethod function */

@@ -93,19 +93,19 @@ class ChronorelaisShippingHelper {
     }
 
     public function printDebug() {
-        if ($this->debug > 0) {
-            $index = static::$DEBUG_INDEX_COUNTER;
-            static::$DEBUG_INDEX_COUNTER++;
-            echo "<style rel=\"stylesheet\" type=\"text/css\">"
-            . ".osh-formula{color:#f90;} .osh-key{color:#0099f7;}"
-            . ".osh-error{color:#f00;} .osh-warning{color:#ff0;} .osh-info{color:#7bf700;}"
-            . ".osh-debug{background:#000;color:#bbb;position:absolute;top:0;left:0;width:100%;z-index:100;-moz-opacity:0.9;opacity:0.9;text-align:left;white-space:pre-wrap;}"
-            . ".osh-debug-content{padding:10px;}"
-            . ".osh-replacement{color:#ff3000;}"
-            . "</style>"
-            . "<div id=\"osh-debug-" . $index . "\" class=\"osh-debug\"><pre class=\"osh-debug-content\"><span style=\"float:right;cursor:pointer;\" onclick=\"document.getElementById('osh-debug-" . $index . "').style.display = 'none';\">[<span style=\"padding:0 5px;color:#f00;\">X</span>]</span>"
-            . "<p>" . $this->debug_header . "</p>" . $this->debug_output . "</pre></div>";
-        }
+//        if ($this->debug > 0) {
+//            $index = static::$DEBUG_INDEX_COUNTER;
+//            static::$DEBUG_INDEX_COUNTER++;
+//            echo "<style rel=\"stylesheet\" type=\"text/css\">"
+//            . ".osh-formula{color:#f90;} .osh-key{color:#0099f7;}"
+//            . ".osh-error{color:#f00;} .osh-warning{color:#ff0;} .osh-info{color:#7bf700;}"
+//            . ".osh-debug{background:#000;color:#bbb;position:absolute;top:0;left:0;width:100%;z-index:100;-moz-opacity:0.9;opacity:0.9;text-align:left;white-space:pre-wrap;}"
+//            . ".osh-debug-content{padding:10px;}"
+//            . ".osh-replacement{color:#ff3000;}"
+//            . "</style>"
+//            . "<div id=\"osh-debug-" . $index . "\" class=\"osh-debug\"><pre class=\"osh-debug-content\"><span style=\"float:right;cursor:pointer;\" onclick=\"document.getElementById('osh-debug-" . $index . "').style.display = 'none';\">[<span style=\"padding:0 5px;color:#f00;\">X</span>]</span>"
+//            . "<p>" . $this->debug_header . "</p>" . $this->debug_output . "</pre></div>";
+//        }
     }
 
     public function setDebugHeader($process) {
@@ -563,12 +563,41 @@ class ChronorelaisShippingHelper {
         }
 
         while (preg_match("/{table ([^}]+) in ([0-9\.:,\*\[\] ]+)}/i", $formula, $result)) {
+            
+           $isGroupedProduct = false;
+           $groupedProductQty = 0;
+           $totalQuantity = 0;
+           $groupedProductsAdditionnal = 0;
+           
+           foreach ($process['products'] as $product) {
+                $parentIds = Mage::getModel('catalog/product_type_grouped')->getParentIdsByChild($product->getId());
+                if ($parentIds) {
+                    $isGroupedProduct = true;
+                    $groupedProductQty += $product->getQuantity();
+                }
+                $totalQuantity += $product->getQuantity();
+           }
+            
             $original = $result[0];
             if ($use_cache && isset($this->_expression_cache[$original])) {
                 $replacement = $this->_expression_cache[$original];
                 self::debug('      get cached expression <span class="osh-replacement">' . $original . '</span> = <span class="osh-formula">' . $replacement . '</span>', 10);
             } else {
-                $reference_value = $this->_evalFormula($result[1]);
+                $reference_value = $this->_evalFormula($result[1] - ($groupedProductQty * 3));
+                
+                if (isset($isGroupedProduct)) {
+                    $fees_table_string = $result[2];
+                    $fees_table = explode(',', $fees_table_string);
+                    foreach ($fees_table as $item) {
+                        $fee_data = explode(':', $item);
+                        $fee = trim($fee_data[1]);
+                        if ($isGroupedProduct == true) {
+                            $groupedProductsAdditionnal = $groupedProductQty * $fee;
+                            break;
+                        }
+                    }
+                }
+                
                 if (isset($reference_value)) {
                     $fees_table_string = $result[2];
 
@@ -583,7 +612,9 @@ class ChronorelaisShippingHelper {
                     $fees_table = explode(',', $fees_table_string);
 
                     $replacement = null;
+                        
                     foreach ($fees_table as $item) {
+                        
                         $fee_data = explode(':', $item);
 
                         $fee = trim($fee_data[1]);
@@ -606,7 +637,7 @@ class ChronorelaisShippingHelper {
                         }
                     }
                 }
-                $replacement = $this->_toString($replacement);
+                $replacement = $this->_toString($replacement + $groupedProductsAdditionnal);
                 if ($use_cache) {
                     $this->setCache($original, $replacement);
                 }
@@ -1423,6 +1454,8 @@ interface OCS_Product {
 
     public function getSku();
 
+    public function getId();
+
     public function getQuantity();
 
     public function getStockData($key);
@@ -1463,3 +1496,4 @@ class OCS_Result {
 }
 
 ?>
+
