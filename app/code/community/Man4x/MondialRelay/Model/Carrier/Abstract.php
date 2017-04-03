@@ -283,7 +283,7 @@ class Man4x_MondialRelay_Model_Carrier_Abstract extends Mage_Shipping_Model_Carr
                 $_method->setCarrier($this->_code);
                 $_method->setCarrierTitle($_config['title']);
                 $_method->setMethod($_config['method']);
-                $_method->setMethodTitle($_config['method_title'] . $_weightTxt);
+                $_method->setMethodTitle($_config['method_title']);
                 $_method->setMethodDescription($_config['method_desc']);
                 // @TODO study relevance of getFinalPriceWithHandlingFee()
                 $_method->setPrice($_price);

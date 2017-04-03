@@ -33,21 +33,16 @@
     <?php $shippingCodePrice = array(); ?>
 
     <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
-    	<!-- <?=$code;?> -->
-    	<?php if($code=="mfb_myflyingbox"){ ?>
-    	<dt><?php echo $this->__('EXPRESSSHIPPINGTEXT') ?>
-    	<?php } else { ?>
-        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?>
-        <?php } ?>
-
-        <?php if($code=="pointsrelaisld1"){ ?>
-        
-        <span><?php echo $this->__('POINTRELAITEXT') ?></span>
-        <?php } ?>
-        </dt>
+        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
         <dd>
             <ul>
             <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+                <?php
+                    if($_rate->getCode()) {
+                        $shippingRateCode = explode("_", $_rate->getCode());
+                        $shippingRateCode = $shippingRateCode[0];
+                    }
+                ?>
                 <?php $shippingCodePrice[] = "'".$_rate->getCode()."':".(float)$_rate->getPrice(); ?>
                 <li>
                    <?php if ($_rate->getErrorMessage()): ?>
@@ -67,7 +62,11 @@
                         <?php endif; ?>
 
                         <?php endif; ?>
-                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $_rate->getMethodTitle() ?>
+                        <label for="s_method_<?php echo $_rate->getCode() ?>">
+                        <?php if ($shippingRateCode == 'mondialrelaypickup' || $shippingRateCode == 'mondialrelayhome'): ?>
+                            <img src="/skin/frontend/base/default/mondialrelay/mondialrelay.png" alt="" style="vertical-align: middle; margin-right: 5px; float: none; display: inline-block;width: 40px;margin-bottom: 5px;">
+                        <?php endif; ?>
+                        <?php echo $_rate->getMethodTitle() ?>
                         <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
                         <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
                         <?php echo $_excl; ?>
@@ -75,14 +74,13 @@
                             (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
                         <?php endif; ?>
                         </label>
-                        <?php
-                            if($_rate->getCode()) {
-                                $shippingRateCode = explode("_", $_rate->getCode());
-                                $shippingRateCode = $shippingRateCode[0];
-                            }
-                        ?>
                         <?php if(Mage::getStoreConfig('carriers/'.$shippingRateCode.'/desc')): ?>
-                            <p><?php echo nl2br(Mage::getStoreConfig('carriers/'.$shippingRateCode.'/desc')); ?></p>
+                            <?php if ($shippingRateCode == 'mondialrelaypickup' || $shippingRateCode == 'mondialrelayhome'): ?>
+                            <?php else: ?>
+                                <p class="method-description">
+                                    <?php echo nl2br(Mage::getStoreConfig('carriers/'.$shippingRateCode.'/desc')); ?>
+                                </p>
+                            <?php endif; ?>
                         <?php endif; ?>
                    <?php endif ?>
                 </li>
