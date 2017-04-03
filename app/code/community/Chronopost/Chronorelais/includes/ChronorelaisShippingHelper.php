@@ -594,12 +594,13 @@ class ChronorelaisShippingHelper {
                         $fee = trim($fee_data[1]);
                         if ($isGroupedProduct == true) {
                             $groupedProductsAdditionnal = $groupedProductQty * $fee;
+                            $replacement = $groupedProductsAdditionnal;
                             break;
                         }
                     }
                 }
                 
-                if (isset($reference_value) && $reference_value > 1) {
+                if (isset($reference_value) && $reference_value > 0) {
                     $fees_table_string = $result[2];
 
                     if (!preg_match('#^' . self::$COUPLE_REGEX . '(?:, *' . self::$COUPLE_REGEX . ')*$#', $fees_table_string)) {
@@ -634,11 +635,14 @@ class ChronorelaisShippingHelper {
 
                         if ($max_value == '*' || $including_max_value && $reference_value <= $max_value || !$including_max_value && $reference_value < $max_value) {
                             $replacement = $fee;
+                            if ($isGroupedProduct == true) {
+                                $replacement = $replacement + $groupedProductsAdditionnal;
+                            }
                             break;
                         }
                     }
                 }
-                $replacement = $this->_toString($replacement + $groupedProductsAdditionnal);
+                $replacement = $this->_toString($replacement);
                 if ($use_cache) {
                     $this->setCache($original, $replacement);
                 }
