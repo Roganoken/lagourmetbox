@@ -30,7 +30,10 @@
     $footer = Mage::getStoreConfig('legenda_setting/footer_settings', $code);
 ?>
 <div class="footer-container">
-    <div class="footer">        
+    <div class="footer">    
+        
+        <a href="<?php echo Mage::getUrl("gourmetbox/ajax/index") ?>" class="ajax-popup-link">Show inline popup</a>
+        
         <?php if($footer['pre_footer_enabled']): ?>
             <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($footer['pre_footer'])->toHtml();?>
         <?php endif; ?>
@@ -266,4 +269,36 @@
 jQuery(function() {
   jQuery.scrollDepth();
 });
+
+<?php
+$cmsIdentifier = Mage::getStoreConfig('cms/gourmetbox/popup_general');
+if ($cmsIdentifier) :
+    $cookieValue = Mage::getModel('core/cookie')->get('popup');
+    ?>
+    if (readCookie("popup") != '<?php echo $cmsIdentifier; ?>') {
+        alert(readCookie("popup"));
+        alert('<?php echo $cmsIdentifier; ?>');
+        jQuery(document).ready(function() {
+            jQuery( ".ajax-popup-link" ).trigger( "click" );
+        });
+
+        jQuery( ".ajax-popup-link" ).magnificPopup({
+            type: 'ajax'
+        });
+    }
+<?php
+endif;
+?>
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 </script>

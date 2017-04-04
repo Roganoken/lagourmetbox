@@ -1,0 +1,21 @@
+<?php
+    $cmsIdentifier = Mage::getStoreConfig('cms/gourmetbox/popup_general');
+?>
+
+<div id="popup-gourmet">
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($cmsIdentifier)->toHtml(); ?> 
+</div>
+
+<script>
+    createCookie('popup', '<?php echo $cmsIdentifier; ?>', 30);
+    
+    function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+</script>

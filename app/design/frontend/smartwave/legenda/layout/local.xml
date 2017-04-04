@@ -29,6 +29,8 @@
 			<action method="addCss"><stylesheet helper="legenda/config/getSettingCssFile"/></action>
 			<action method="addCss"><stylesheet helper="legenda/config/getDesignCssFile"/></action>
 			<action method="addCss" ifconfig="legenda_setting/custom_settings/custom_css"><stylesheet>css/custom.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><name>css/magnific-popup.css</name><params/></action> 
+            <action method="addItem"><type>skin_js</type><name>js/jquery.magnific-popup.min.js</name></action>
         </reference> 
         <reference name="root">
             <block type="blog/menu_sidebar" name="blog.sideblock" as="blog.sideblock" template="blog/side_block.phtml" />
@@ -600,4 +602,8 @@
             <action method="setTemplate" ifconfig="zoom/general/enable"><template>smartwave/zoom/product/view/media.phtml</template></action>
         </reference>
     </review_product_list>
+    
+    <gourmetbox_ajax_index>
+        <block type="core/template" name="root" template="ajax/popup.phtml" />
+    </gourmetbox_ajax_index>
 </layout>
