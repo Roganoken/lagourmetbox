@@ -276,8 +276,6 @@ if ($cmsIdentifier) :
     $cookieValue = Mage::getModel('core/cookie')->get('popup');
     ?>
     if (readCookie("popup") != '<?php echo $cmsIdentifier; ?>') {
-        alert(readCookie("popup"));
-        alert('<?php echo $cmsIdentifier; ?>');
         jQuery(document).ready(function() {
             jQuery( ".ajax-popup-link" ).trigger( "click" );
         });
