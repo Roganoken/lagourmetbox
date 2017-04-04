@@ -7574,3 +7574,13 @@ ul.list-arrow li:hover {
 #pickup-selection-link {
     text-decoration: underline;
 }
+
+#popup-gourmet {
+    background-color: white;
+    max-width: 500px;
+    min-height: 200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}

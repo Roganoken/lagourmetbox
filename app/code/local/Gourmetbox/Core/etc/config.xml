@@ -5,4 +5,15 @@
             <version>1.0.0</version>
         </Gourmetbox_Core>
     </modules>
+     <frontend>
+       <routers>
+          <gourmetbox>
+              <use>standard</use>
+              <args>
+                 <module>Gourmetbox_Core</module>
+                 <frontName>gourmetbox</frontName>
+              </args>
+           </gourmetbox>
+       </routers>
+    </frontend>
 </config>
