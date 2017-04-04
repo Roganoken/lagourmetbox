@@ -7575,6 +7575,10 @@ ul.list-arrow li:hover {
     text-decoration: underline;
 }
 
+.ajax-popup-link {
+    display: none;
+}
+
 #popup-gourmet {
     background-color: white;
     max-width: 500px;
