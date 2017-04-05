@@ -183,7 +183,6 @@ HTML;
         $menu = <<<HTML
 $homeLink
 $menuContent
-$blogLink
 $customLinks
 $customBlocks
 HTML;

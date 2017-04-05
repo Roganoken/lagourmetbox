@@ -32,6 +32,7 @@
 <?php $_links = $this->getLinks(); ?>
 <?php if(count($_links)>0): ?>
 <ul class="links"<?php if($this->getName()): ?> id="<?php echo $this->getName() ?>"<?php endif;?>>
+    <li><a href="<?php echo Mage::getUrl('blog'); ?>">Blog</a></li>
     <?php foreach($_links as $_link): ?>
         <?php if ($_link instanceof Mage_Core_Block_Abstract):?>
             <?php echo $_link->toHtml() ?>
