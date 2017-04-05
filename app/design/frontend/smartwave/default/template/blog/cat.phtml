@@ -26,7 +26,7 @@
             <a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a>
         </h3>
         <div class="post-info">
-            <span class="posted-on"><?php echo $post->getCreatedTime(); ?></span>
+            <span class="posted-on"><?php echo date('d M Y', strtotime($post->getCreatedTime())) ?></span>
         </div>
         <div class="postContent"><?php echo $post->getPostContent(); ?></div>
         <div class="clearer"></div>
