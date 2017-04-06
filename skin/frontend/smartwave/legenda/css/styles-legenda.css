@@ -7594,3 +7594,8 @@ ul.list-arrow li:hover {
     padding: 10px;
     box-sizing: border-box;
 }
+
+.catalog-category-view .page-heading .a-center {
+    display: none;
+    
+} 
