@@ -124,6 +124,10 @@ font-size: 11px;
     font-size: 13px;
 }
 
+.main-nav .menu > li > a.act {
+    color: #D27C4A;
+}
+
 .main-nav .menu > li.menu-full-width .nav-sublist-dropdown, .fixed-header .menu > li.menu-full-width .nav-sublist-dropdown{
 	padding: 10px 0 10px;
 }
