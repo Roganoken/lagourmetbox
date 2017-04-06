@@ -79,3 +79,13 @@
 <?php else: ?>
     <?php echo $this->getProductListHtml() ?>
 <?php endif; ?>
+
+<?php
+    $cmsIdentifier = Mage::getStoreConfig('cms/gourmetbox/charte_qualite');
+?>
+
+<?php if ($cmsIdentifier): ?>
+    <div id="charte-qualite">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($cmsIdentifier)->toHtml(); ?> 
+    </div>
+<?php endif; ?>
