@@ -124,6 +124,11 @@ font-size: 11px;
     font-size: 13px;
 }
 
+.main-nav .menu > li > a.act {
+    color: #D27C4A;
+    text-decoration: underline;
+}
+
 .main-nav .menu > li.menu-full-width .nav-sublist-dropdown, .fixed-header .menu > li.menu-full-width .nav-sublist-dropdown{
 	padding: 10px 0 10px;
 }
@@ -281,10 +286,6 @@ border-bottom:3px solid #E4DCD2;
 
 .product-collateral .tabs .tab-title {
 	/* display: none; */
-}
-
-.more-views {
-    display: none;
 }
 
 .availability {

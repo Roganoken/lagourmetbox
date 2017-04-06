@@ -29,6 +29,33 @@
                             <show_in_store>1</show_in_store>
                             <comment>identifiant du block CMS</comment>
                         </popup_general>
+                        <company_gift_label translate="label">
+                            <label>Cadeaux d'affaires label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Nom de l'onglet</comment>
+                        </company_gift_label>
+                        <company_gift_link translate="label">
+                            <label>Cadeaux d'affaires lien</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>url complète</comment>
+                        </company_gift_link>
+                        <charte_qualite translate="label">
+                            <label>Charte qualité</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>identifiant du block CMS</comment>
+                        </charte_qualite>
                     </fields>
                 </gourmetbox>
             </groups>

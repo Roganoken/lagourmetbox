@@ -1550,6 +1550,9 @@ div.notice-msg {
 
 /* Sorter */
 /* Toolbar */
+.catalog-category-view .toolbar {
+    display: none;
+}
 .toolbar {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -3587,7 +3590,12 @@ tr.summary-details-excluded {
   .products-grid li.item {
     float: left;
     padding: 0 15px;
-    margin-bottom: 60px; }
+    margin-bottom: 30px; }
+  .toolbar-bottom .toolbar {
+    margin-top: 0px; 
+    margin-bottom: 0px;
+    border: 0px; 
+  }
     .products-slider .products-grid li.item {
       margin-bottom: 0;
       width: 100%; }
@@ -7586,3 +7594,8 @@ ul.list-arrow li:hover {
     padding: 10px;
     box-sizing: border-box;
 }
+
+.catalog-category-view .page-heading .a-center {
+    display: none;
+    
+} 

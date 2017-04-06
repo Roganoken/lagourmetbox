@@ -68,11 +68,11 @@ class Smartwave_Megamenu_Helper_Data extends Mage_Core_Helper_Abstract
         extract($menuData);
         // $homeLinkUrl        = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
         $homeLinkUrl        = Mage::helper('core/url')->getHomeUrl();
-        $homeLinkText       = $this->__('Home');
+        $homeLinkText       = $this->__('CONCEPT');
         $homeLink           = '';
         $homeIconClass      = '';
         if ($this->getIsHomePage()) {
-            $homeIconClass = 'act';
+            $homeIconClass = 'home';
         }
         if ($_showHomeLink) {
             if ($_showHomeIcon && $mode == 'dt') {

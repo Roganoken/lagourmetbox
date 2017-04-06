@@ -32,7 +32,15 @@
 <?php $_links = $this->getLinks(); ?>
 <?php if(count($_links)>0): ?>
 <ul class="links"<?php if($this->getName()): ?> id="<?php echo $this->getName() ?>"<?php endif;?>>
-    <li><a href="<?php echo Mage::getUrl('blog'); ?>">Blog</a></li>
+    <?php if (Mage::getStoreConfigFlag('cms/gourmetbox/company_gift_label')
+                && Mage::getStoreConfigFlag('cms/gourmetbox/company_gift_link')): ?>
+        <li class="topbar-company">
+            <a href="<?php echo Mage::getStoreConfig('cms/gourmetbox/company_gift_link'); ?>">
+                <?php echo Mage::getStoreConfig('cms/gourmetbox/company_gift_label'); ?>
+            </a>
+        </li>
+    <?php endif ?>
+    <li class="topbar-blog"><a href="<?php echo Mage::getUrl('blog'); ?>">Blog</a></li>
     <?php foreach($_links as $_link): ?>
         <?php if ($_link instanceof Mage_Core_Block_Abstract):?>
             <?php echo $_link->toHtml() ?>
