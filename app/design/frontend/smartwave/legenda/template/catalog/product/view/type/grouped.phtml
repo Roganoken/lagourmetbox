@@ -55,7 +55,7 @@
             <th class="a-right"><?php echo $this->__('Price') ?></th>
             <?php endif; ?>
             <?php if ($_product->isSaleable()): ?>
-            <th class="a-center"><?php echo $this->__('Qty') ?></th>
+            <th class="a-center grouped-qty"><?php echo $this->__('Qty') ?></th>
             <?php endif; ?>
         </tr>
     </thead>
@@ -79,7 +79,7 @@
             <?php if ($_product->isSaleable()): ?>
             <td class="a-center">
             <?php if ($_item->isSaleable()) : ?>
-                <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" readonly="readonly" />
+                <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty grouped-qty" readonly="readonly" />
             <?php else: ?>
                 <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
             <?php endif; ?>

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<widgets>
+    <gourmetbox_abonnement type="gourmetbox_core/widget_abonnement" translate="name description" module="gourmetbox_core">
+        <name>Abonnements</name>
+        <description>Widget pour afficher les abonnements</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <abonnement1 translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Abonnement 1</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Product...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>10</sort_order>
+            </abonnement1>
+            <abonnement2 translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Abonnement 2</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Product...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>20</sort_order>
+            </abonnement2>
+            <abonnement3 translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Abonnement 3</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Product...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>30</sort_order>
+            </abonnement3>
+            <abonnement4 translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Abonnement 4</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Product...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>40</sort_order>
+            </abonnement4>
+        </parameters>
+    </gourmetbox_abonnement>
+    <gourmet_test type="catalog/product_widget_link" translate="name description" module="catalog">
+        <name>gourmet_test</name>
+        <description>Link to a Specified Product</description>
+        <is_email_compatible>1</is_email_compatible>
+        <parameters>
+            <id_path translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Product</label>
+                <type>label</type>
+                <helper_block>
+                    <type>adminhtml/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open">
+                            <open>Select Product...</open>
+                        </button>
+                    </data>
+                </helper_block>
+                <sort_order>10</sort_order>
+            </id_path>
+            <anchor_text translate="label description">
+                <visible>1</visible>
+                <label>Anchor Custom Text</label>
+                <description>If empty, the Product Name will be used</description>
+                <type>text</type>
+            </anchor_text>
+            <title translate="label">
+                <visible>1</visible>
+                <label>Anchor Custom Title</label>
+                <type>text</type>
+            </title>
+            <template translate="label">
+                <label>Template</label>
+                <visible>1</visible>
+                <type>select</type>
+                <value>catalog/product/widget/link/link_block.phtml</value>
+                <values>
+                    <default translate="label">
+                        <value>catalog/product/widget/link/link_block.phtml</value>
+                        <label>Product Link Block Template</label>
+                    </default>
+                    <link_inline translate="label">
+                        <value>catalog/product/widget/link/link_inline.phtml</value>
+                        <label>Product Link Inline Template</label>
+                    </link_inline>
+                </values>
+            </template>
+        </parameters>
+    </gourmet_test>
+</widgets>

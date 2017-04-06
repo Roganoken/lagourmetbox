@@ -6,31 +6,21 @@
                 <?php if ($produit): ?>
                     <?php $produitAbonnement = $this->getProductAbonnement($produit); ?>
                     <?php if ($i == 1) { $referencePrice = $produitAbonnement->getPrice();} ?>
-                    <div class="abonnement-single col-sm-3">
+                    <div class="abonnement-single col-sm-3 abonnement-<?php echo $i; ?>">
                         <?php $superGroup[$produitAbonnement->getId()] = $produitAbonnement->getQty(); ?>
 
-                        <!-- Name -->
-                        <p><?php echo $produitAbonnement->getName(); ?></p>
-
                         <!-- Month number -->
-                        <p><?php echo $i . " " . $this->__('month'); ?></p>
+                        <p class="month"><?php echo round($produitAbonnement->getQty()) . " " . $this->__('month'); ?></p>
 
+                        <!-- Info --><!-- Savings -->
+                        <p class="savings"><?php echo $this->__('Save') . " " . Mage::helper('core')->currency(($referencePrice * $produitAbonnement->getQty()) - ($produitAbonnement->getPrice() * $produitAbonnement->getQty()), true, false); ?></p>
+                        <p class="fees">+ <?php echo $this->__('shipping fees'); ?></p>
+                        
                         <!-- Price -->
-                        <?php if ($i == 1): ?>
-                            <p><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice(), true, false); ?> / <?php echo $this->__('month'). ' + ' . $this->__('shipping fees'); ?></p><br/>
-                        <?php else: ?>
-                             <p><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice(), true, false); ?> / <?php echo $this->__('month'). ' (' . $this->__('total ') . Mage::helper('core')->currency($produitAbonnement->getPrice() * $produitAbonnement->getQty(), true, false) . ') + ' . $this->__('shipping fees'); ?></p>
-                        <?php endif; ?>
-                            
-                        <!-- Savings -->
-                        <?php if ($i == 1): ?>
-                            <p style="visibility: hidden;"><?php echo $this->__('Save') . " " . Mage::helper('core')->currency(($referencePrice * $produitAbonnement->getQty()) - ($produitAbonnement->getPrice() * $produitAbonnement->getQty()), true, false); ?></p>
-                        <?php else: ?>
-                            <p><?php echo $this->__('Save') . " " . Mage::helper('core')->currency(($referencePrice * $produitAbonnement->getQty()) - ($produitAbonnement->getPrice() * $produitAbonnement->getQty()), true, false); ?></p>
-                        <?php endif; ?>
+                        <p class="price"><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice(), true, false); ?></p>
 
                         <!-- Payment -->
-                        <p><?php echo $this->__('One time payment'); ?></p>
+                        <p class="payment"><?php echo $this->__('One time payment'); ?></p>
 
                         <!-- Add to Cart -->
                         <button onclick="showOptions('<?php echo $produit->getId(); ?>')"><?php echo $this->__('Add to Cart'); ?></button>
