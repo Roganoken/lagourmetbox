@@ -72,7 +72,7 @@ class Smartwave_Megamenu_Helper_Data extends Mage_Core_Helper_Abstract
         $homeLink           = '';
         $homeIconClass      = '';
         if ($this->getIsHomePage()) {
-            $homeIconClass = 'act';
+            $homeIconClass = 'home';
         }
         if ($_showHomeLink) {
             if ($_showHomeIcon && $mode == 'dt') {
