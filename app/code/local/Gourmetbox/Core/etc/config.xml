@@ -5,15 +5,32 @@
             <version>1.0.0</version>
         </Gourmetbox_Core>
     </modules>
-     <frontend>
-       <routers>
-          <gourmetbox>
-              <use>standard</use>
-              <args>
-                 <module>Gourmetbox_Core</module>
-                 <frontName>gourmetbox</frontName>
-              </args>
-           </gourmetbox>
-       </routers>
+    <global>
+        <helpers>
+            <gourmetbox_core>
+                <class>Gourmetbox_Core_Helper</class>
+            </gourmetbox_core>
+        </helpers>
+        <blocks>
+            <gourmetbox_core>
+                <class>Gourmetbox_Core_Block</class>
+            </gourmetbox_core>
+        </blocks>
+        <models>
+            <gourmetbox_core>
+                <class>Gourmetbox_Core_Model</class>
+            </gourmetbox_core>
+        </models>
+    </global>
+    <frontend>
+        <routers>
+            <gourmetbox>
+                <use>standard</use>
+                <args>
+                    <module>Gourmetbox_Core</module>
+                    <frontName>gourmetbox</frontName>
+                </args>
+            </gourmetbox>
+        </routers>
     </frontend>
 </config>

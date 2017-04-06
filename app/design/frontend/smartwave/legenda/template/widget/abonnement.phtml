@@ -1,0 +1,33 @@
+<div id="abonnement-widget" class="container">
+    <div class="col-sm-12">
+        <div class="row">
+            <?php for ($i=1;$i<=4;$i++): ?>
+                <?php $produit = $this->getProduct($this, $i); ?>
+                <?php if ($produit): ?>
+                    <?php $produitAbonnement = $this->getProductAbonnement($produit); ?>
+                    <?php if ($i == 1) { $referencePrice = $produitAbonnement->getPrice();} ?>
+                    <div class="abonnement-single col-sm-3 abonnement-<?php echo $i; ?>">
+                        <?php $superGroup[$produitAbonnement->getId()] = $produitAbonnement->getQty(); ?>
+
+                        <!-- Month number -->
+                        <p class="month"><?php echo round($produitAbonnement->getQty()) . " " . $this->__('month'); ?></p>
+
+                        <!-- Info --><!-- Savings -->
+                        <p class="savings"><?php echo $this->__('Save') . " " . Mage::helper('core')->currency(($referencePrice * $produitAbonnement->getQty()) - ($produitAbonnement->getPrice() * $produitAbonnement->getQty()), true, false); ?></p>
+                        <p class="fees">+ <?php echo $this->__('shipping fees'); ?></p>
+                        
+                        <!-- Price -->
+                        <p class="price"><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice(), true, false); ?></p>
+
+                        <!-- Payment -->
+                        <p class="payment"><?php echo $this->__('One time payment'); ?></p>
+
+                        <!-- Add to Cart -->
+                        <button onclick="showOptions('<?php echo $produit->getId(); ?>')"><?php echo $this->__('Add to Cart'); ?></button>
+                        <a href="<?php echo Mage::getUrl('ajaxcart/index/options/', array("product_id" => $produit->getId())); ?>" class="fancybox" id="fancybox<?php echo $produit->getId(); ?>" style="display:none">Options</a>
+                    </div>
+                <?php endif; ?>
+            <?php endfor;?>
+        </div>
+    </div>
+</div>
