@@ -1550,6 +1550,9 @@ div.notice-msg {
 
 /* Sorter */
 /* Toolbar */
+.catalog-category-view .toolbar {
+    display: none;
+}
 .toolbar {
   margin-top: 20px;
   margin-bottom: 20px;
