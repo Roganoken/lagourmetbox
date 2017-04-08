@@ -32,15 +32,11 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
         <!-- [ middle starts here] -->
             <tr>
                 <td valign="top">
-                    <h1 style="font-size:18px; font-weight:normal; line-height:18px; margin:0 0 11px 0;"">Bonjour, {{htmlescape var=$billing.getName()}}</h1>
+                    <h1 style="font-size:18px; font-weight:normal; line-height:18px; margin:0 0 11px 0;">Bonjour, {{htmlescape var=$billing.getName()}}</h1>
                     <p style="font-size:12px; line-height:16px; margin:0;">
                         Merci d'avoir passé commandé chez {{var store.getFrontendName()}}.</p>
                         
                     <p style="font-size:12px; line-height:16px; margin:0;">Ci-dessous, vous trouverez le détail de l’envoi de votre commande. Nous vous rappelons que vous pouvez suivre l’état de votre commande en nous écrivant au <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>, nous vous répondrons personnellement aussi vite que possible.</p>
-                    
-                    <p style="font-size:12px; line-height:16px; margin:0;">
-                        Votre expédition #{{var shipment.increment_id}} pour la commande #{{var order.increment_id}}.
-                    </p>
                 </td>
             </tr>
             <tr>
