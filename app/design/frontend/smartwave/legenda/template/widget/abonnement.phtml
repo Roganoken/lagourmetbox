@@ -17,7 +17,7 @@
                         <p class="fees">+ <?php echo $this->__('shipping fees'); ?></p>
                         
                         <!-- Price -->
-                        <p class="price"><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice(), true, false); ?></p>
+                        <p class="price"><?php echo Mage::helper('core')->currency($produitAbonnement->getPrice() * $produitAbonnement->getQty(), true, false); ?></p>
 
                         <!-- Payment -->
                         <p class="payment"><?php echo $this->__('One time payment'); ?></p>
