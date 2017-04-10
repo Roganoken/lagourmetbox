@@ -7595,7 +7595,7 @@ ul.list-arrow li:hover {
     box-sizing: border-box;
 }
 
-.catalog-category-view .page-heading .a-center {
+.catalog-category-view .page-heading .a-center .breadcrumbs {
     display: none;
 } 
 
@@ -7684,6 +7684,11 @@ ul.list-arrow li:hover {
 .abonnement-single button:hover {
     background: #ffffff;
     color: #D27C4A;
+}
+
+.abonnement-single .link:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 @media screen and (max-width: 768px){
