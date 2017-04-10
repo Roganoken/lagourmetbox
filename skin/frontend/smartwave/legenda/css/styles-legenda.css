@@ -7686,6 +7686,11 @@ ul.list-arrow li:hover {
     color: #D27C4A;
 }
 
+.abonnement-single .link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 @media screen and (max-width: 768px){
     .abonnement-single.col-sm-3{
         width: 100%;
