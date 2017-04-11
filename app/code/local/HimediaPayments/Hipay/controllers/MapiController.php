@@ -392,7 +392,12 @@ class HimediaPayments_Hipay_MapiController extends Mage_Core_Controller_Front_Ac
 //															. Mage::helper('hipaymod')->__('CUSTOMER EMAIL') . ": '".$emailClient."'";
 			        		Mage::log("History Comment: " . $historyComment);
 
-							$order->addStatusHistoryComment($historyComment);
+                                                if ($operation == "capture" && $status == 'ok') {
+                                                    $order->addStatusHistoryComment($historyComment, Mage_Sales_Model_Order::STATE_PROCESSING);
+                                                } else {
+                                                    $order->addStatusHistoryComment($historyComment);
+                                                }
+                                                
 			        		Mage::log("add StatusHistoryComment (notification of ".$operation.")");
 			        		
 			        		if($operation == "capture")
