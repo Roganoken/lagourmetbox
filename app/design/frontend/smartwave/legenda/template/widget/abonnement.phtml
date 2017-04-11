@@ -10,8 +10,11 @@
                         <?php $superGroup[$produitAbonnement->getId()] = $produitAbonnement->getQty(); ?>
                         <a href="<?php echo $produit->getProductUrl(); ?>" class="link" title="<?php echo $produit->getName(); ?>">
                             <!-- Month number -->
-                            <p class="month"><?php echo round($produitAbonnement->getQty()) . " " . $this->__('month'); ?></p>
-
+                            <?php if ($produitAbonnement->getQty() == 1): ?>
+                                <p class="month"><?php echo round($produitAbonnement->getQty()) . " " . $this->__('month'); ?></p>
+                            <?php else: ?>
+                                <p class="month"><?php echo round($produitAbonnement->getQty()) . " " . $this->__('months'); ?></p>
+                            <?php endif; ?>
                             <!-- Info --><!-- Savings -->
                             <p class="savings"><?php echo $this->__('Save') . " " . Mage::helper('core')->currency(($referencePrice * $produitAbonnement->getQty()) - ($produitAbonnement->getPrice() * $produitAbonnement->getQty()), true, false); ?></p>
                             <p class="fees">+ <?php echo $this->__('shipping fees'); ?></p>
